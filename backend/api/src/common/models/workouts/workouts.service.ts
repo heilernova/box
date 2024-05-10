@@ -1,9 +1,10 @@
-import { ConnectionDbService } from '@app/common/connection-db';
 import { Injectable } from '@nestjs/common';
-import { IWorkout, IWorkoutCreate, IWorkoutUpdate } from './workouts.interfaces';
+import { ConnectionDbService } from '@app/common/connection-db';
+import { convertToSlug } from '@app/common/utils';
+import { OmitBy } from '@app/types';
 import { isUUID } from 'class-validator';
 import { UUID } from 'crypto';
-import { convertToSlug } from '@app/common/utils';
+import { IWorkout, IWorkoutCreate, IWorkoutUpdate } from './workouts.interfaces';
 
 @Injectable()
 export class WorkoutsService {
@@ -14,8 +15,8 @@ export class WorkoutsService {
         return values as T;
     }
 
-    async create(data: IWorkoutCreate): Promise<IWorkout> {
-        return (await this._db.insert('workouts', this.parseValue(data))).rows[0];
+    async create(data: OmitBy<IWorkoutCreate, 'slug'>): Promise<IWorkout> {
+        return (await this._db.insert('workouts', this.parseValue(data), '*')).rows[0];
     }
 
     async get(value: string): Promise<IWorkout | undefined> {
