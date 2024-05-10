@@ -1,0 +1,24 @@
+{
+  "name": "box",
+  "version": "1.0.0",
+  "description": "Box es una aplicativo web para la comunidad de atletas de CrossFit de habla hispana, desarrollo con Node.js y de condigo abierto",
+  "keywords": [
+    "Node",
+    "CrossFit",
+    "Gym",
+    "NestJS",
+    "Angular",
+    "Angular Material",
+    "PostgreSQL",
+    "PWA"
+  ],
+  "author": {
+    "name": "Heiler Nova",
+    "url": "https://www.novah.dev"
+  },
+  "license": "GPL-3.0-only",
+  "workspaces": [
+    "backend/api",
+    "frontend/*"
+  ]
+}
