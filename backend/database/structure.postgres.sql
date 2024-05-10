@@ -129,7 +129,7 @@ create table workouts
     "create_at" timestamp not null default now(),
     "update_at" timestamp not null default now(),
     "name_in_english" varchar(50) not null,
-    "name_in_spanish" varchar(50) not null,
+    "name_in_spanish" varchar(50) default null,
     "abbreviation" varchar(6) default null,
     "slug" varchar(50) not null,
     "rm" boolean not null default false,
