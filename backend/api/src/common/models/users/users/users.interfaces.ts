@@ -26,6 +26,6 @@ export interface IUserDbRow {
     permissions: string[]
 }
 
-export interface IUserCreate extends PartialBy<OmitBy<IUserDbRow, 'id' | 'update_at' | 'create_at'>, 'status' | 'role' | 'is_coach'>{}
+export interface IUserCreate extends PartialBy<OmitBy<IUserDbRow, 'id' | 'update_at' | 'create_at'>, 'status' | 'role' | 'is_coach' | 'permissions'>{}
 export interface IUserUpdate extends Partial<IUserCreate> {}
 export interface IUser extends IUserDbRow {}
