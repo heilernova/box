@@ -5,6 +5,7 @@ import { UsersService } from './models/users/users/users.service';
 import { UserValidatorsService } from './models/users/user-validators/user-validators.service';
 import { UserRecordWeightService } from './models/users/user-record-weight/user-record-weight.service';
 import { UserRecordRmsService } from './models/users/user-record-rms/user-record-rms.service';
+import { WorkoutsService } from './models/workouts/workouts.service';
 
 const services = [
     ConnectionDbService,
@@ -14,7 +15,9 @@ const services = [
     UsersService,
     UserValidatorsService,
     UserRecordWeightService,
-    UserRecordRmsService
+    UserRecordRmsService,
+
+    WorkoutsService
 ];
 
 @Global()
