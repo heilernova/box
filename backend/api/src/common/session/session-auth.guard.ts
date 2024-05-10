@@ -4,10 +4,12 @@ import { Request } from 'express';
 import { Observable } from 'rxjs';
 import { ISessionData } from './session.interfaces';
 import { AppSession } from './session.model';
+import { Reflector } from '@nestjs/core';
+import { PERMISSION_KEY } from './permission.decorator';
 
 @Injectable()
 export class SessionAuthGuard implements CanActivate {
-  constructor(private readonly _jwt: JWTService){}
+  constructor(private readonly _jwt: JWTService, private reflector: Reflector){}
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
@@ -19,7 +21,17 @@ export class SessionAuthGuard implements CanActivate {
     token = authorization.substring(7);
     try {
       let data: ISessionData = this._jwt.verify(token);
-      context.switchToHttp().getRequest<Request&{ appSession: AppSession }>().appSession = new AppSession(data, token);
+      let session = new AppSession(data, token);
+      context.switchToHttp().getRequest<Request&{ appSession: AppSession }>().appSession = session;
+      const requiredPermissions: string[] | undefined | null = this.reflector.getAllAndOverride<string[]>(PERMISSION_KEY, [
+        context.getHandler(),
+        context.getClass(),
+      ]);
+  
+      if (requiredPermissions && requiredPermissions.length > 0){
+        return session.checkPermissions(requiredPermissions);
+      }
+
     } catch (error) {
       throw new HttpException("Token invalido", 401);
     }
