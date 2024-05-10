@@ -10,7 +10,6 @@ import { ISessionData, SessionAuthGuard, Session } from '@app/common/session';
 export class AuthController {
     constructor(
         private readonly _users: UsersService,
-        private readonly _rms: UserRecordRmsService,
         private readonly _jwt: JWTService,
         private readonly _validators: UserValidatorsService
     ){}
@@ -32,8 +31,7 @@ export class AuthController {
             sex: user.sex,
             tall: user.tall,
             weight: user.weight,
-            token,
-            rms: await this._rms.get(user.id)
+            token
         }
     }
 
@@ -61,8 +59,7 @@ export class AuthController {
             sex: user.sex,
             tall: user.tall,
             weight: user.weight,
-            token,
-            rms: []
+            token
         }
     }
 
@@ -83,8 +80,7 @@ export class AuthController {
             sex: user.sex,
             tall: user.tall,
             weight: user.weight,
-            token,
-            rms: await this._rms.get(user.id)
+            token
         } 
     }
 }
@@ -100,5 +96,4 @@ export interface IResponseAuth {
     weight: number;
     sex: Sex;
     token: string;
-    rms: IUserRecordRM[]
 }
