@@ -10,6 +10,10 @@ export class UserRecordRmsService {
         let sql: string = 'select record_id, workout_id, create_at, name_in_english, name_in_spanish, slug, abbreviation, weight_in_kilos, weight_in_pounds from vi_users_rms where user_id = $1';
         return (await this._db.query(sql, [id])).rows;
     }
+
+    async register(data: { workout_id: UUID, user_id: UUID, weight_in_kilos: number, weight_in_pounds: number }): Promise<{ id: UUID, create_at: Date, weight_in_kilos: number, weight_in_pounds: number }> {
+        return (await this._db.insert('users_records_rm', data, 'id, create_at, weight_in_kilos, weight_in_pounds')).rows[0];
+    }
 }
 
 
