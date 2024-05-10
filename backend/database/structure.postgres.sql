@@ -74,12 +74,6 @@ create table users_log
     "detail" varchar(80) not null
 );
 
-create table users_permissions
-(
-    "user_id" uuid not null,
-    "permission" varchar(50) not null
-);
-
 create table users_records_weight
 (
     "id" uuid primary key default gen_random_uuid(),
