@@ -1,5 +1,7 @@
+import { UUID } from "crypto";
+
 export interface ISessionData {
-    id: string;
+    id: UUID;
     username: string;
     role: string;
     permissions: string[]
