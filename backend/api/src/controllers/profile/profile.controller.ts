@@ -14,7 +14,7 @@ export class ProfileController {
     ){}
 
     @Get()
-    async getInfo(@Session() data: ISessionData){
+    async getInfo(@Session('data') data: ISessionData){
         let user: IUser | undefined = await this._users.get(data.id);
         if (!user) throw new HttpException('Usuario no encontrado', 400);
         return {
@@ -32,7 +32,7 @@ export class ProfileController {
     }
 
     @Patch()
-    async update(@Session() sessionData: ISessionData, @Body() data: ProfileUpdateDto): Promise<void> {
+    async update(@Session('data') sessionData: ISessionData, @Body() data: ProfileUpdateDto): Promise<void> {
         let user: IUser | undefined = await this._users.get(sessionData.id);
         if (!user) throw new HttpException('Usuario no encontrado', 400);
         let validation = await this._validators.emailAndUsername(data.username, data.email, sessionData.id);
@@ -49,7 +49,7 @@ export class ProfileController {
     }
 
     @Patch('password')
-    async changePassword(@Session() sessionData: ISessionData, @Body() data: UpdatePasswordDto): Promise<void> {
+    async changePassword(@Session('data') sessionData: ISessionData, @Body() data: UpdatePasswordDto): Promise<void> {
         let user: IUser | undefined = await this._users.get(sessionData.id);
         if (!user) throw new HttpException('Usuario no encontrado', 400);
         if (!compareSync(data.password, user.password)) throw new HttpException('Tú contraseña es incorrecta', 400);
@@ -58,12 +58,12 @@ export class ProfileController {
     }
 
     @Get('rms')
-    async getRMS(@Session() sessionData: ISessionData){
+    async getRMS(@Session('data') sessionData: ISessionData){
         return this._rms.get(sessionData.id);
     }
 
     @Post('rms')
-    async recordRM(@Session() sessionData: ISessionData, @Body() data: RmRecordDto){
+    async recordRM(@Session('data') sessionData: ISessionData, @Body() data: RmRecordDto){
         let user: IUser | undefined = await this._users.get(sessionData.id);
         if (!user) throw new HttpException('Usuario no encontrado', 400);
         let result = await this._rms.register({ user_id: sessionData.id, ...data });
