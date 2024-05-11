@@ -109,7 +109,7 @@ create function user_insert_or_update_after() returns trigger language plpgsql a
 begin
     if new.weight is not null then
         if (OLD.weight IS DISTINCT FROM NEW.weight) then
-            insert into users_weight_records("user_id", "weight_in_kilos") values(new.id, new.weight);
+            insert into users_records_weight("user_id", "weight_in_kilos") values(new.id, new.weight);
         end if;
         return new;
     end if;
