@@ -59,7 +59,21 @@ export class ProfileController {
 
     @Get('rms')
     async getRMS(@Session('data') sessionData: ISessionData){
-        return this._rms.get(sessionData.id);
+        return (await this._rms.get(sessionData.id)).map(x => {
+            return {
+                id: x.workout_id,
+                name_in_english: x.name_in_english,
+                name_in_spanish: x.name_in_spanish,
+                abbreviation: x.abbreviation,
+                slug: x.slug,
+                record: x.record_id ? {
+                    id: x.record_id,
+                    create_at: x.create_at,
+                    weight_in_kilos: x.weight_in_kilos,
+                    weight_in_pounds: x.weight_in_pounds
+                } : null    
+            }
+        });
     }
 
     @Post('rms')
