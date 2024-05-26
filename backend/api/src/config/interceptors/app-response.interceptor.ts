@@ -20,7 +20,7 @@ export class AppResponseInterceptor implements NestInterceptor {
         statusCode: context.switchToHttp().getResponse<Response>().statusCode,
         developer: {
           name: "Heiler Nova",
-          homepage: "http://github.com/heilernova"
+          homepage: "https://www.novah.dev/devs/heilernova"
         },
         data: value,
         links: [
