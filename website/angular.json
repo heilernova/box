@@ -73,7 +73,8 @@
               "buildTarget": "website:build:production"
             },
             "development": {
-              "buildTarget": "website:build:development"
+              "buildTarget": "website:build:development",
+              "port": 4030
             }
           },
           "defaultConfiguration": "development"
