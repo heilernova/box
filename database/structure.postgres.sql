@@ -283,6 +283,14 @@ create table wods
     "type_rating" wod_type_rating not null
 );
 
+create table wods_comments
+(
+    "id" uuid primary key default gen_random_uuid(),
+    "create_at" timestamp not null default now(),
+    "user_id" uuid not null,
+    "comment" varchar(500) not null
+);
+
 create table wods_results
 (
     "id" uuid primary key default gen_random_uuid(),
