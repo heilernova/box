@@ -265,3 +265,39 @@ select
 from vi_users_records_rms t1
 join workouts t2 on t2.id = t1.workout_id
 order by t1.workout_id, t1.user_id, t1.create_at desc;
+
+--------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+-- WOD
+--------------------------------------------------------------------------------------------------------------------------
+
+create type wod_type_rating as enum('asc', 'desc');
+
+create table wods
+(
+    "id" uuid primary key default gen_random_uuid(),
+    "create_at" timestamp not null default now(),
+    "user_id" uuid not null,
+    "gym_id" uuid,
+    "data" json not null,
+    "type_rating" wod_type_rating not null
+);
+
+create table wods_results
+(
+    "id" uuid primary key default gen_random_uuid(),
+    "create_at" timestamp not null default now(),
+    "wod_id" uuid not null,
+    "user_id" uuid not null,
+    "result" json not null,
+    "score" smallint,
+    "verified" uuid
+);
+
+create table wods_results_wods_results
+(
+    "id" uuid primary key default gen_random_uuid(),
+    "create_at" timestamp not null default now(),
+    "wods_results_id" uuid not null,
+    "user_id" uuid not null
+);
