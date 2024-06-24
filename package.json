@@ -16,10 +16,13 @@
     "name": "Heiler Nova",
     "url": "https://www.novah.dev"
   },
+  "scripts": {
+    "start": "npx turbo turbo-start"
+  },
   "license": "GPL-3.0-only",
   "workspaces": [
-    "backend/api",
-    "frontend/*"
+    "api",
+    "website"
   ],
   "devDependencies": {
     "turbo": "^1.13.3"
