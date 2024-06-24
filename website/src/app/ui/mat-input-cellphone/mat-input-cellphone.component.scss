@@ -1,0 +1,17 @@
+div {
+    display: flex;
+}
+
+input {
+    border: none;
+    background: none;
+    padding: 0;
+    outline: none;
+    font: inherit;
+    text-align: left;
+    color: currentColor;
+    min-width: 0;
+    &:disabled {
+        color: var(--mdc-filled-text-field-disabled-input-text-color);
+    }
+}

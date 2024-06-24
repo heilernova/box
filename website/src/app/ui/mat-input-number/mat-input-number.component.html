@@ -1,0 +1,13 @@
+<div class="mat-input-number-container">
+    <input
+    class="mat-input-number"
+    inputmode="numeric"
+    [readOnly]="readOnlyChange()"
+    [style]="customStyle()"
+    [maxlength]="maxLength()"
+    [imask]="mask"
+    [(ngModel)]="inputValue"
+    [attr.aria-labelledby]="getLabelId()"
+    (focusin)="onFocusIn($event)"
+    (focusout)="onFocusOut($event)">
+</div>

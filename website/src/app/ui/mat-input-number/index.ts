@@ -1,0 +1,1 @@
+export * from './mat-input-number.component';

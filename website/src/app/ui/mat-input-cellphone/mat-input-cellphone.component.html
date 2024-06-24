@@ -1,0 +1,12 @@
+<div class="mat-input-cellphone-container">
+    <input
+    class="mat-input-cellphone"
+    inputmode="numeric"
+    [style]="customStyle()"
+    [maxlength]="maxLength()"
+    [imask]="{mask: '000 000 0000'}"
+    [(ngModel)]="inputValue"
+    [attr.aria-labelledby]="getLabelId()"
+    (focusin)="onFocusIn($event)"
+    (focusout)="onFocusOut($event)">
+</div>
