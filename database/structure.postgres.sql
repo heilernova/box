@@ -17,21 +17,21 @@ create table countries
 (
     "code" char(2) primary key,
     "name" varchar(100) not null,
-    "secciones" varchar(50) not null
+    "sections_name" varchar(50) not null
 );
 
 create table countries_sections
 (
-    "country_code" char(2) not null,
-    "code" char(2) not null,
-    "name" varchar(100)
+    "code" char(2) primary key,
+    "name" varchar(100),
+    "country_code" char(2) not null
 );
 
 create table countries_cities
 (
-    "code" char(5) not null,
-    "section_code" char(2) not null,
-    "name" varchar(100)
+    "code" char(5) primary key,
+    "name" varchar(100),
+    "section_code" char(2) not null
 );
 
 --------------------------------------------------------------------------------------------------------------------------
@@ -58,10 +58,11 @@ create table users
     "birthdate" date not null,
     "cellphone" cellphone,
     "tall" smallint, --> Height in centimeters
-    "weight" smallint, --> Weight in kilograms
+    "weight" smallint, --> Weight in kilogramos
     "country" char(2) not null,
     "password" text not null, --> password hash
-    "permissions" text[] not null default array[]::text[]
+    "permissions" text[] not null default array[]::text[],
+    "settings" json not null default '{}'::json
 );
 
 create table users_log
@@ -138,6 +139,18 @@ create table workouts
     "description" text
 );
 
+create table workouts_log
+(
+    "id" uuid primary key default gen_random_uuid(),
+    "create_at" timestamp not null default now(),
+    "user_id" uuid not null,
+    "workout_id" uuid not null,
+    "action" varchar(20),
+    "detail" varchar(80),
+    "before" json not null,
+    "after" json not null
+);
+
 --------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------
 -- CrossFit gyms
@@ -170,18 +183,18 @@ create table gyms_collaborators
 );
 
 
-create type gyms_balances_transaction_type as enum('membership', 'expense', 'cost', 'compras', 'sale');
+-- create type gyms_balances_transaction_type as enum('membership', 'expense', 'cost', 'compras', 'sale');
 
-create table gyms_balances_transactions
-(
-    "id" uuid primary key default gen_random_uuid(),
-    "create_at" timestamp not null default now(),
-    "user_id" uuid not null,
-    "type" gyms_balances_transaction_type not null,
-    "description" varchar(80) not null,
-    "amount" numeric(15, 2) not null,
-    "balance" numeric(15, 2) not null
-);
+-- create table gyms_balances_transactions
+-- (
+--     "id" uuid primary key default gen_random_uuid(),
+--     "create_at" timestamp not null default now(),
+--     "user_id" uuid not null,
+--     "type" gyms_balances_transaction_type not null,
+--     "description" varchar(80) not null,
+--     "amount" numeric(15, 2) not null,
+--     "balance" numeric(15, 2) not null
+-- );
 
 
 create table gyms_customers
@@ -196,33 +209,26 @@ create table gyms_customers
     "balance" numeric(15, 2) not null default 0
 );
 
-create table gyms_customers_memberships
-(
-    "id" uuid primary key default gen_random_uuid(),
-    "create_at" timestamp not null default now(),
-    "user_id" uuid not null,
-    "customer_id" uuid not null,
-    "price" numeric(15, 2) not null,
-    "exp" date
-);
+-- create table gyms_customers_memberships
+-- (
+--     "id" uuid primary key default gen_random_uuid(),
+--     "create_at" timestamp not null default now(),
+--     "user_id" uuid not null,
+--     "customer_id" uuid not null,
+--     "price" numeric(15, 2) not null,
+--     "exp" date
+-- );
 
-create table gyms_customers_transactions
-(
-    "id" uuid primary key default gen_random_uuid(),
-    "create_at" timestamp not null default now(),
-    "customer_id" uuid not null,
-    "user_id" uuid not null,
-    "detail" varchar(80) not null,
-    "amount" numeric(15, 2) not null,
-    "balance" numeric(15, 2) not null
-);
-
-
---------------------------------------------------------------------------------------------------------------------------
---------------------------------------------------------------------------------------------------------------------------
--- Foreign keys
---------------------------------------------------------------------------------------------------------------------------
-
+-- create table gyms_customers_transactions
+-- (
+--     "id" uuid primary key default gen_random_uuid(),
+--     "create_at" timestamp not null default now(),
+--     "customer_id" uuid not null,
+--     "user_id" uuid not null,
+--     "detail" varchar(80) not null,
+--     "amount" numeric(15, 2) not null,
+--     "balance" numeric(15, 2) not null
+-- );
 
 
 --------------------------------------------------------------------------------------------------------------------------
@@ -288,6 +294,7 @@ create table wods_comments
     "id" uuid primary key default gen_random_uuid(),
     "create_at" timestamp not null default now(),
     "user_id" uuid not null,
+    "wod_id" uuid not null,
     "comment" varchar(500) not null
 );
 
@@ -309,3 +316,107 @@ create table wods_results_wods_results
     "wods_results_id" uuid not null,
     "user_id" uuid not null
 );
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+-- Foreign keys
+--------------------------------------------------------------------------------------------------------------------------
+
+alter table countries_sections
+    add constraint fk_countries_sections__countries
+        foreign key (country_code)
+        references countries(code);
+
+alter table countries_cities
+    add constraint fk_countries_cities__countries_sections
+        foreign key (section_code)
+        references countries_sections(code);
+
+alter  table users_log
+    add constraint fk_users_log__users
+        foreign key (user_id)
+        references users(id)
+        on delete cascade;
+
+alter  table users_records_weight
+    add constraint fk_users_records_weight__users
+        foreign key (user_id)
+        references users(id)
+        on delete cascade;
+
+alter table users_records_rm
+    add constraint fk_users_records_rm__users
+        foreign key (user_id)
+        references users(id)
+        on delete cascade,
+    add constraint users_records_rm__workouts
+        foreign key (workout_id)
+        references workouts(id);
+
+alter table users_records_pr
+    add constraint fk_users_records_pr__users
+        foreign key (user_id)
+        references users(id)
+        on delete cascade,
+    add constraint users_records_rm__workouts
+        foreign key (workout_id)
+        references workouts(id);
+
+alter table workouts_log
+    add constraint fk_workouts_log__users
+        foreign key (user_id)
+        references users(id)
+        on delete cascade;
+
+alter table gyms
+    add constraint fk_gyms__users
+        foreign key (user_id)
+        references users(id)
+        on delete cascade;
+
+alter table gyms_collaborators
+    add constraint fk_gyms_collaborators__gyms
+        foreign key (gym_id)
+        references gyms(id)
+        on delete cascade,
+    add constraint fk_gyms_collaborators__users
+        foreign key (user_id)
+        references users(id)
+        on delete cascade;
+
+alter table gyms_customers
+    add constraint fk_gyms_customers__gyms
+        foreign key (gym_id)
+        references gyms(id),
+    add constraint fk_gyms_customers__users
+        foreign key (user_id)
+        references users(id);
+
+alter table wods_comments
+    add constraint fk_wods_comments__wods
+        foreign key (wod_id)
+        references wods(id)
+        on delete cascade,
+    add constraint fk_wods_comments__users_id
+        foreign key (user_id)
+        references users(id);
+
+alter table wods_results
+    add constraint fk_wods_results__wods_id
+        foreign key (wod_id)
+        references wods(id)
+        on delete cascade,
+    add constraint fk_wods_results__users
+        foreign key (user_id)
+        references users(id);
+
+alter table wods_results_wods_results
+    add constraint fk_wods_results_wods_results__wods_results
+        foreign key (wods_results_id)
+        references wods_results_wods_results(id)
+        on delete cascade,
+    add constraint fk_wods_results_wods_results__users
+        foreign key (user_id)
+        references users(id);
