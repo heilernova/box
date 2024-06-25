@@ -2,46 +2,111 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
-@import '@angular/material/prebuilt-themes/azure-blue.css';
+// Plus imports for other components in your app.
 
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
 @include mat.core();
 
 // Define the theme object.
-$website-theme: mat.define-theme((
+$la-casa-imperial-webpanel-theme: mat.define-theme((
   color: (
     theme-type: light,
     primary: mat.$azure-palette,
-    tertiary: mat.$red-palette,
+    tertiary: mat.$blue-palette,
   ),
   density: (
     scale: 0,
   )
 ));
 
+// Dark theme
+// Define the theme object.
+$dark-theme: mat.define-theme((
+  color: (
+    theme-type: dark,
+    primary: mat.$azure-palette,
+    tertiary: mat.$blue-palette,
+  ),
+  density: (
+    scale: 0,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
 :root {
-  @include mat.all-component-themes($website-theme);
-  --app-primary-color: #3399FF;
-
-  --app-nav-color: rgb(61, 61, 61);
-  --app-nav-item-active-color: var(--app-primary-color)
+  @include mat.all-component-themes($la-casa-imperial-webpanel-theme);
+  --body-background-color: #FFFFFF;
+  --body-color: #1F1F1F;
   
-  --mat-form-field-container-height: 36px!important;
-  --mat-form-field-container-vertical-padding: 8px;
+  --aside-background-color: #F3F6FC;
+  --footer-color: #F3F6FC;
+  --footer-background-color: #BE1622;
 
-  // --mdc-chip-container-height: 100%;
+  // Variables Material
+ --mat-form-field-container-height: 36px;
+ --mat-form-field-container-vertical-padding: 8px;
 
-  // --mdc-outlined-button-container-shape: 8px;
-  // --mdc-outlined-text-field-container-shape: 8px;
+ --mdc-chip-container-height: 100%;
+
+ --mdc-outlined-button-container-shape: 8px;
+ --mdc-outlined-text-field-container-shape: 8px;
+}
+
+.dark-theme {
+  --body-background-color: #1F1F1F;
+  --body-color: #e3e3e3;
+
+  --aside-background-color: #2D2F31;
+  --footer-background-color: #004A77;;
+  --footer-color: #F3F6FC;
+
+  @include mat.all-component-colors($dark-theme);
 }
 
 
 html, body { height: 100%; }
 body { 
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif; 
-  min-height: 100vh;
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    min-height: 100vh;
+    background-color: var(--body-background-color);
+    color: var(--body-color);
 }
 
-.cursor-pointer {
-  cursor: pointer;
+h1 {
+  font-size: 1.7em!important;
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 1.5em!important;
+}
+
+h3 {
+  font-size: 1.3em!important;
+}
+
+.mat-input-low.mat-form-field-appearance-outline {
+  --mat-form-field-container-height: 30px;
+  --mat-form-field-container-vertical-padding: 6px;
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+}
+
+.mdc-evolution-chip-set .mdc-evolution-chip {
+  height: 100%;
+}
+
+.mdc-evolution-chip-set .mdc-evolution-chip {
+  margin: 2px 2px!important;
+  border-radius: 5px;
+}
+
+.mat-mdc-menu-panel {
+  border:1px solid #424242!important;
 }

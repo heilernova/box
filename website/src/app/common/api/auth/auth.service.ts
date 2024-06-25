@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class ApiAuthService {
 
   constructor(private readonly _http: HttpClient) { }
 
@@ -24,6 +24,7 @@ export class AuthService {
 
 export interface APIAuthResponse {
   id: string,
+  role: 'admin' | 'user';
   username: string,
   name: string,
   last_name: string,

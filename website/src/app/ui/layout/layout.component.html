@@ -3,6 +3,12 @@
         Box
     </div>
     <nav>
+        @for (item of navItems(); track $index) {
+            <a routerLink="/rms" routerLinkActive="active">
+                <i class="fa-solid fa-clipboard-list"></i>
+                RMs
+            </a>
+        }
         <a routerLink="/ejercicios" routerLinkActive="active">
             <i class="fa-solid fa-dumbbell"></i>
             Ejercicios
@@ -26,8 +32,14 @@
     </nav>
 
     <div class="access">
-        <button routerLink="/login" mat-button>Iniciar sesión</button>
-        <button routerLink="/registrarse" mat-button color="accent">Registrarse</button>
+        @if (user()) {
+            <div>
+                {{user()?.name}} {{user()?.lastName}}
+            </div>
+        } @else {
+            <button routerLink="/login" mat-button>Iniciar sesión</button>
+            <button routerLink="/registrarse" mat-button color="accent">Registrarse</button>
+        }
     </div>
 </header>
 <section>

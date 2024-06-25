@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { APIAthleteInfo, ApiAthletesService } from '../../api/api/athletes';
+import { APIAthleteInfo, ApiAthletesService } from '../../api/athletes';
 
 @Injectable({
   providedIn: 'root'

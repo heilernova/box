@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { SessionService } from './common/session';
 
 @Component({
   selector: 'app-root',
@@ -10,4 +11,9 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'website';
+  private readonly _session = inject(SessionService);
+
+  constructor(){
+    this._session.init();
+  }
 }
