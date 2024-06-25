@@ -1,6 +1,6 @@
-import { IUser, UserRecordRmsService, UsersService, UserValidatorsService } from '@app/common/models/users';
+import { IUser, UserRecordRmsService, UserRecordWeightService, UsersService, UserValidatorsService } from '@app/common/models/users';
 import { ISessionData, Session, SessionAuthGuard } from '@app/common/session';
-import { Body, Controller, Get, HttpException, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, Patch, Post, Put, UseGuards } from '@nestjs/common';
 import { ProfileUpdateDto, RmRecordDto, UpdatePasswordDto } from './dto';
 import { compareSync } from 'bcrypt';
 
@@ -10,7 +10,8 @@ export class ProfileController {
     constructor(
         private readonly _users: UsersService,
         private readonly _validators: UserValidatorsService,
-        private readonly _rms: UserRecordRmsService
+        private readonly _rms: UserRecordRmsService,
+        private readonly _weight: UserRecordWeightService
     ){}
 
     @Get()
@@ -31,18 +32,21 @@ export class ProfileController {
         }
     }
 
-    @Patch()
+    @Put()
     async update(@Session('data') sessionData: ISessionData, @Body() data: ProfileUpdateDto): Promise<void> {
         let user: IUser | undefined = await this._users.get(sessionData.id);
         if (!user) throw new HttpException('Usuario no encontrado', 400);
-        let validation = await this._validators.emailAndUsername(data.username, data.email, sessionData.id);
-        if (!validation.email || !validation.username){
-            if (validation.email == validation.email){
-                throw new HttpException('El correo electrónico y el nombre de usuario ya están en uso', 400);
-            } else if (validation.username){
-                throw new HttpException('El nombre de usuario ya están en uso', 400);
-            } else {
-                throw new HttpException('El correo electrónico ya están en uso', 400);
+
+        if (data.email || data.username){
+            let validation = await this._validators.emailAndUsername(data.username ?? user.username, data.email ?? user.email, sessionData.id);
+            if (!validation.email || !validation.username){
+                if (validation.email == validation.email){
+                    throw new HttpException('El correo electrónico y el nombre de usuario ya están en uso', 400);
+                } else if (validation.username){
+                    throw new HttpException('El nombre de usuario ya están en uso', 400);
+                } else {
+                    throw new HttpException('El correo electrónico ya están en uso', 400);
+                }
             }
         }
         await this._users.update(sessionData.id, data);
@@ -87,5 +91,10 @@ export class ProfileController {
             weight_in_kilos: data.weight_in_kilos,
             weight_in_pounds: data.weight_in_pounds
         }
+    }
+
+    @Get('records/weight')
+    async recordsWeight(@Session('data') data: ISessionData){
+        return this._weight.getRecords(data.id);
     }
 }

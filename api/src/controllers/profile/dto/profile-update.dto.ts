@@ -28,7 +28,8 @@ export class ProfileUpdateDto {
 
     @Transform(x => new Date(x.value))
     @IsDate()
-    birthdate!: Date;
+    @IsOptional()
+    birthdate?: Date;
 
     @IsPhoneNumber()
     @IsOptional()
@@ -42,7 +43,7 @@ export class ProfileUpdateDto {
 
     @IsNumber()
     @Min(1)
-    @Max(20)
+    @Max(200)
     @IsOptional()
     weight!: number;
 

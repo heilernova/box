@@ -7,7 +7,7 @@ export class UserRecordWeightService {
     constructor(private readonly _db: ConnectionDbService){}
 
     async getRecords(id: UUID): Promise<IWeightRecord[]> {
-        return (await this._db.query<IWeightRecord>('select id, create_at, weight_in_kilos from users_records_weight where user_id = $1')).rows;
+        return (await this._db.query<IWeightRecord>('select id, create_at, weight_in_kilos from users_records_weight where user_id = $1', [id])).rows;
     }
 }
 
