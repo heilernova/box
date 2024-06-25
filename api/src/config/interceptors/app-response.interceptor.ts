@@ -13,21 +13,22 @@ export class AppResponseInterceptor implements NestInterceptor {
     if (context.switchToHttp().getRequest<Request>().url.startsWith('/media')){
       return next.handle();
     }
-    return next.handle().pipe(map(value => {
-      return {
-        name: 'Box',
-        version: APP_CONFIG.version,
-        statusCode: context.switchToHttp().getResponse<Response>().statusCode,
-        developer: {
-          name: "Heiler Nova",
-          homepage: "https://www.novah.dev/devs/heilernova"
-        },
-        data: value,
-        links: [
-          "https://box.novah.dev",
-          "https://www.novah.dev"
-        ]
-      } as IResponseAPI
-    }));
+    return next.handle();
+    // .pipe(map(value => {
+    //   return {
+    //     name: 'Box',
+    //     version: APP_CONFIG.version,
+    //     statusCode: context.switchToHttp().getResponse<Response>().statusCode,
+    //     developer: {
+    //       name: "Heiler Nova",
+    //       homepage: "https://www.novah.dev/devs/heilernova"
+    //     },
+    //     data: value,
+    //     links: [
+    //       "https://box.novah.dev",
+    //       "https://www.novah.dev"
+    //     ]
+    //   } as IResponseAPI
+    // }));
   }
 }
