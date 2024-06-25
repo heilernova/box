@@ -1,5 +1,5 @@
 import { Body, Controller, Get, HttpException, Post, UseGuards } from '@nestjs/common';
-import { IUser, IUserRecordRM, Sex, UserRecordRmsService, UsersService, UserValidatorsService } from '@app/common/models/users';
+import { IUser, IUserRecordRM, Sex, UserRecordRmsService, UserRole, UsersService, UserValidatorsService } from '@app/common/models/users';
 import { JWTService } from '@app/common/jwt';
 import { CredentialsDto, SignUpBody } from './dto';
 import { isEmail } from 'class-validator';
@@ -23,6 +23,7 @@ export class AuthController {
         token = this._jwt.signIn<ISessionData>({ id: user.id, role: user.role, username: user.username, permissions: user.permissions }, '1y');
         return {
             id: user.id,
+            role: user.role,
             username: user.username,
             name: user.name,
             last_name: user.last_name,
@@ -51,6 +52,7 @@ export class AuthController {
         let token = this._jwt.signIn<ISessionData>({ id: user.id, role: user.role, username: user.username, permissions: user.permissions }, '1y');
         return {
             id: user.id,
+            role: user.role,
             username: user.username,
             name: user.name,
             last_name: user.last_name,
@@ -72,6 +74,7 @@ export class AuthController {
         token = this._jwt.signIn<ISessionData>({ id: user.id, role: user.role, username: user.username, permissions: user.permissions }, '1y');
         return {
             id: user.id,
+            role: user.role,
             username: user.username,
             name: user.name,
             last_name: user.last_name,
@@ -87,6 +90,7 @@ export class AuthController {
 
 export interface IResponseAuth {
     id: string;
+    role: UserRole;
     username: string;
     name: string;
     last_name: string;
