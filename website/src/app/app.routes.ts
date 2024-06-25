@@ -8,6 +8,7 @@ export const routes: Routes = [
         loadComponent: () => import('./ui/layout/layout.component').then(x => x.LayoutComponent),
         children: [
             { path: 'gyms', loadChildren: () => import('./pages/gyms/gyms.routes') },
+            { path: 'atletas', loadComponent: () => import('./pages/athlete-list-pages/athlete-list-pages.component').then(x => x.AthleteListPagesComponent) },
             { path: '**', loadComponent: () => import('./pages/not-found-page/not-found-page.component').then(x => x.NotFoundPageComponent) },
         ]
     }
