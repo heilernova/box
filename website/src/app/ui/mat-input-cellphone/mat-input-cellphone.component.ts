@@ -1,7 +1,7 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { AfterViewInit, Component, ElementRef, Inject, Input, Optional, Self, signal } from '@angular/core';
-import { AbstractControlDirective, ControlValueAccessor, FormsModule, NgControl } from '@angular/forms';
+import { AbstractControlDirective, ControlValueAccessor, FormsModule, NgControl, Validators } from '@angular/forms';
 import { MAT_FORM_FIELD, MatFormField, MatFormFieldControl } from '@angular/material/form-field';
 import { Subject, last } from 'rxjs';
 import { MatInputNumber } from '../mat-input-number';
@@ -42,13 +42,27 @@ export class MatInputCellphone  implements MatFormFieldControl<string | null>, C
   private _disabled: boolean = false;
   private _readOnly = false;
 
-  errorState: boolean = false;
+  // errorState: boolean = false;
   controlType?: string | undefined;
   autofilled?: boolean | undefined;
   userAriaDescribedBy?: string | undefined;
   disableAutomaticLabeling?: boolean | undefined;
   onChange = (_: any) => {};
   onTouched = () => {};
+
+  get errorState(): boolean {
+    let touched =  this.ngControl?.touched;
+
+    if (touched){
+      let errors = this.ngControl?.errors;
+      let er = (this.ngControl?.control?.invalid || errors) ? true : false;
+   
+      this.stateChanges.next();
+      return er;
+    } else {
+      return false;
+    }
+  }
 
   public customStyle = signal<{ [p: string]: string}>({});
   public maxLength = signal<number>(13);
@@ -71,6 +85,13 @@ export class MatInputCellphone  implements MatFormFieldControl<string | null>, C
       this.ngControl = ngControl;
     }
   }
+
+  ngOnInit(): void {
+    if ( this.ngControl ){
+      this._required = this.ngControl.control?.hasValidator(Validators.required) || false;
+    }
+  }
+
   ngAfterViewInit(): void {
     this._htmlInput = this._elementRef.nativeElement.querySelector('input') as HTMLInputElement;
   }

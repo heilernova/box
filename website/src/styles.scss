@@ -26,6 +26,11 @@ $website-theme: mat.define-theme((
 // that you are using.
 :root {
   @include mat.all-component-themes($website-theme);
+  --app-primary-color: #3399FF;
+
+  --app-nav-color: rgb(61, 61, 61);
+  --app-nav-item-active-color: var(--app-primary-color)
+  
 }
 
 // Comment out the line below if you want to use the pre-defined typography utility classes.
@@ -37,4 +42,12 @@ $website-theme: mat.define-theme((
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+  min-height: 100vh;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

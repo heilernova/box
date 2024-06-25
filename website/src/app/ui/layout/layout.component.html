@@ -1,0 +1,42 @@
+<header>
+    <div class="logo cursor-pointer" routerLink="/">
+        Box
+    </div>
+    <nav>
+        <a routerLink="/ejercicios" routerLinkActive="active">
+            <i class="fa-solid fa-dumbbell"></i>
+            Ejercicios
+        </a>
+        <a routerLink="/wods" routerLinkActive="active">
+            <i class="fa-solid fa-weight-hanging"></i>
+            WODs
+        </a>
+        <a routerLink="/gyms" routerLinkActive="active">
+            <i class="fa-solid fa-box"></i>
+            Gym's
+        </a>
+        <a routerLink="/atletas" routerLinkActive="active">
+            <i class="fa-solid fa-people-group"></i>
+            Atletas
+        </a>
+        <a routerLink="/competencias" routerLinkActive="active">
+            <i class="fa-solid fa-medal"></i>
+            Competencias
+        </a>
+    </nav>
+
+    <div class="access">
+        <button routerLink="/login" mat-button>Iniciar sesión</button>
+        <button routerLink="/registrarse" mat-button color="accent">Registrarse</button>
+    </div>
+</header>
+<section>
+    <div class="page-container">
+        <div class="page">
+            <router-outlet/>
+        </div>
+    </div>
+    <footer>
+        Copyright © 2024 Novah.dev
+    </footer>
+</section>

@@ -1,0 +1,78 @@
+<section>
+    <form [formGroup]="formGroup">
+        <div class="header">
+            <h1 routerLink="/">Box</h1>
+            <h2>Registro de cuenta</h2>
+        </div>
+        <div class="inputs">
+            <mat-form-field>
+               <mat-label>Nombre</mat-label> 
+               <input matInput formControlName="name">
+            </mat-form-field>
+            <mat-form-field>
+               <mat-label>Apellido</mat-label> 
+               <input matInput formControlName="lastName">
+            </mat-form-field>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 5em), 1fr)); column-gap: 1em;">
+                <mat-form-field>
+                    <mat-label>Sexo</mat-label> 
+                    <mat-select formControlName="sex">
+                        <mat-option value="M">M</mat-option>
+                        <mat-option value="F">F</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                   <mat-label>Altura(cm)</mat-label> 
+                   <mat-input-number matInput formControlName="tall"/>
+                </mat-form-field>
+                <mat-form-field>
+                   <mat-label>Peso(Kg)</mat-label> 
+                   <mat-input-number matInput formControlName="weight"/>
+                </mat-form-field>
+                
+            </div>
+
+            <mat-divider style="margin-bottom: 1em;"/>
+            
+            <mat-form-field>
+                <mat-label>Correo electrónico</mat-label> 
+                <input matInput formControlName="email">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Teléfono móvil</mat-label> 
+                <mat-input-cellphone matInput formControlName="cellphone"/>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <mat-label>usuario</mat-label> 
+                <mat-input-number matInput formControlName="username"/>
+            </mat-form-field>
+            
+            <mat-divider style="margin-bottom: 1em;"/>
+
+            <mat-form-field>
+               <mat-label>Contraseña</mat-label> 
+               <mat-input-number matInput formControlName="password"/>
+            </mat-form-field>
+
+            <mat-form-field>
+               <mat-label>Confirmar contraseña</mat-label> 
+               <mat-input-number matInput formControlName="confirmPassword"/>
+            </mat-form-field>
+
+
+        </div>
+        <div class="actions">
+            <button mat-flat-button>
+                Registrarse
+            </button>
+            <button mat-button color="accent" routerLink="/sign-in">
+                Iniciar sesión
+            </button>
+        </div>
+    </form>
+</section>
+<footer>
+    Copyright © 2024 Novah.dev
+</footer>

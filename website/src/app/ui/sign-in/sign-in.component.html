@@ -1,0 +1,29 @@
+<section>
+    <form [formGroup]="credentials">
+        <div class="header">
+            <h1 routerLink="/">Box</h1>
+            <h2>Iniciar sesión</h2>
+        </div>
+        <div class="inputs">
+            <mat-form-field>
+               <mat-label>Usuario o correo electrónico</mat-label> 
+               <input matInput formControlName="username">
+            </mat-form-field>
+            <mat-form-field>
+               <mat-label>Contraseña</mat-label> 
+               <input matInput formControlName="password">
+            </mat-form-field>
+        </div>
+        <div class="actions">
+            <button mat-button>
+                Iniciar sesión
+            </button>
+            <button mat-button color="accent" routerLink="/sign-up">
+                Registrarse
+            </button>
+        </div>
+    </form>
+</section>
+<footer>
+    Copyright © 2024 Novah.dev
+</footer>
