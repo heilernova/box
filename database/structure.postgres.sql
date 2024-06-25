@@ -20,6 +20,8 @@ create table countries
     "sections_name" varchar(50) not null
 );
 
+insert into countries values ('CO', 'Colombia', 'Departamentos');
+
 create table countries_sections
 (
     "code" char(2) primary key,
@@ -53,6 +55,7 @@ create table users
     "username" varchar(20) not null unique,
     "name" varchar(20) not null,
     "last_name" varchar(20) not null,
+    "alias" varchar(40),
     "sex" sex not null,
     "email" email not null unique,
     "birthdate" date not null,
@@ -117,7 +120,7 @@ begin
     return old;
 end;$$;
 
-create trigger insert_or_update before insert or update on users
+create trigger insert_or_update after insert or update on users
 for each row execute function user_insert_or_update_after();
 
 --------------------------------------------------------------------------------------------------------------------------
@@ -171,7 +174,6 @@ create table gyms
     "coordinates_google_maps" text,
     "email" text,
     "cellphone" cellphone not null,
-    "memberships"  json[] not null default array[]::json[],
     "social_networks" json[] not null default array[]::json[],
     "attention_schedule" json[] not null default array[]::json[],
     "tags" text[] default array[]::text[],
