@@ -15,9 +15,13 @@ export class SessionService {
 
   constructor() { }
 
-  private setUser(user: User){
+  private setUser(user: User | null){
     this._user = user;
-    localStorage.setItem('session', user.toJson());
+    if (user){
+      localStorage.setItem('session', user.toJson());
+    } else {
+      localStorage.removeItem('session');
+    }
     this.changeUser.next(this._user);
   }
 
@@ -43,7 +47,7 @@ export class SessionService {
     return false
   }
 
-  signIn(credentials: { username: string, password: string }){
+  signIn(credentials: { username: string, password: string }): Promise<void> {
     return new Promise((resolve, reject) => {
       this._apiAuth.signIn(credentials).subscribe({
         next: res => {
@@ -62,9 +66,14 @@ export class SessionService {
           }, this._apiRMs);
 
           this.setUser(user);
+          resolve();
         },
         error: err => reject(err)
       })
     })
+  }
+
+  logout(){
+    this.setUser(null);
   }
 }

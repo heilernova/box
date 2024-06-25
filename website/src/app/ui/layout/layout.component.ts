@@ -4,6 +4,8 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { SessionService } from '@app/common/session';
 import { User } from '@app/common/session/User.model';
 
+import { MatMenuModule } from '@angular/material/menu';
+
 @Component({
   selector: 'app-layout',
   standalone: true,
@@ -11,7 +13,8 @@ import { User } from '@app/common/session/User.model';
     RouterLink,
     RouterLinkActive,
     RouterOutlet,
-    MatButtonModule
+    MatButtonModule,
+    MatMenuModule
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'
@@ -30,5 +33,9 @@ export class LayoutComponent {
         this.navItems.set([]);
       }
     })
+  }
+
+  onClickLogout(): void {
+    this._session.logout();
   }
 }

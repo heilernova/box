@@ -80,7 +80,7 @@ section {
             }
         }
         footer {
-            padding: .5em;
+            padding: .3em;
             .content {
                 display: none;
             }
@@ -88,7 +88,7 @@ section {
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
                 width: 100%;
-                padding-bottom: 1em;
+                // padding-bottom: 1em;
                 a {
                     display: flex;
                     flex-direction: column;
