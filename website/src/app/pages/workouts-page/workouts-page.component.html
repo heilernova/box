@@ -5,7 +5,7 @@
         </mat-form-field>
         <div>
             @if (edit()) {
-                <button mat-stroked-button>Agregar ejercicio</button>
+                <button mat-stroked-button (click)="onClickNewWorkout()">Agregar ejercicio</button>
             }
         </div>
     </app-page-header>
@@ -19,6 +19,7 @@
                 <mat-card-actions>
                     @if (edit()) {
                         <button mat-button>Editar</button>
+                        <button mat-button>Eliminar</button>
                     }
                     <button mat-button>Ver video</button>
                 </mat-card-actions>

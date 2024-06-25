@@ -46,7 +46,7 @@ export interface IWorkout {
   createAt: Date,
   updateAt: Date,
   nameInEnglish: string,
-  nameInSpanish: string,
+  nameInSpanish: string | null,
   abbreviation: string | null,
   slug: string,
   rm: boolean,
@@ -60,7 +60,7 @@ export interface IWorkoutData {
   createAt: string,
   updateAt: string,
   nameInEnglish: string,
-  nameInSpanish: string,
+  nameInSpanish: string | null,
   abbreviation: string | null,
   slug: string,
   rm: boolean,
@@ -74,7 +74,7 @@ export class Workout {
   createAt: Date;
   updateAt: Date;
   nameInEnglish: string;
-  nameInSpanish: string;
+  nameInSpanish: string | null;
   abbreviation: string | null;
   slug: string;
   rm: boolean;

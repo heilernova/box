@@ -6,6 +6,9 @@ import { DataWorkoutsService, Workout } from '@app/common/data/workouts';
 import { SessionService } from '@app/common/session';
 import { PageModule } from '@app/ui/page';
 
+import { MatDialog } from '@angular/material/dialog';
+import { WorkoutFormDlgComponent } from '@app/ui/workout-form-dlg/workout-form-dlg.component';
+
 @Component({
   selector: 'app-workouts-page',
   standalone: true,
@@ -21,6 +24,7 @@ import { PageModule } from '@app/ui/page';
 export class WorkoutsPageComponent {
   private _dataWorkouts = inject(DataWorkoutsService);
   private _session = inject(SessionService);
+  private _matDialog = inject(MatDialog);
 
   public readonly list = signal<Workout[]>([]);
   public readonly edit = signal<boolean>(false);
@@ -39,5 +43,9 @@ export class WorkoutsPageComponent {
         this.edit.set(false);
       }
     })
+  }
+
+  onClickNewWorkout(): void {
+    this._matDialog.open(WorkoutFormDlgComponent, { width: '100%', maxWidth: '700px'});
   }
 }

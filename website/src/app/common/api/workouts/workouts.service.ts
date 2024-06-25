@@ -12,6 +12,10 @@ export class ApiWorkoutsService {
   getAll(): Observable<APIWorkout[]>{
     return this._http.get<APIWorkout[]>('workouts');
   }
+
+  create(data: APIWorkoutCreate): Observable<APIWorkout> {
+    return this._http.post<APIWorkout>('workouts', data);
+  }
 }
 
 
@@ -20,11 +24,22 @@ export interface APIWorkout {
   create_at: string,
   update_at: string,
   name_in_english: string,
-  name_in_spanish: string,
+  name_in_spanish: string | null,
   abbreviation: string | null,
   slug: string,
   rm: boolean,
   pr: boolean,
   youtube: string | null,
   description: string | null
+}
+
+export interface APIWorkoutCreate {
+
+  name_in_english: string,
+  name_in_spanish: string | null,
+  abbreviation: string | null,
+  rm: boolean,
+  pr: boolean,
+  youtube?: string | null,
+  description?: string | null
 }
