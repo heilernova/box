@@ -47,6 +47,7 @@ export class User {
     toJson(): string {
         return JSON.stringify({
             id: this.id,
+            role: this.role,
             username: this.username,
             name: this.name,
             lastName: this.lastName,

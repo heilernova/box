@@ -1,0 +1,28 @@
+<app-page>
+    <app-page-header>
+        <mat-form-field>
+            <input matInput placeholder="Buscar">
+        </mat-form-field>
+        <div>
+            @if (edit()) {
+                <button mat-stroked-button>Agregar ejercicio</button>
+            }
+        </div>
+    </app-page-header>
+    <app-page-content class="result">
+        @for (item of list(); track $index) {
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>{{item.nameInEnglish}}</mat-card-title>
+                    <mat-card-subtitle>{{item.nameInSpanish}}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-actions>
+                    @if (edit()) {
+                        <button mat-button>Editar</button>
+                    }
+                    <button mat-button>Ver video</button>
+                </mat-card-actions>
+            </mat-card>
+        }
+    </app-page-content>
+</app-page>

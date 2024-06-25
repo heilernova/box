@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ApiWorkoutsService } from './workouts.service';
+import { DataWorkoutsService } from './data-workouts.service';
 
-describe('WorkoutsService', () => {
-  let service: ApiWorkoutsService;
+describe('DataWorkoutsService', () => {
+  let service: DataWorkoutsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ApiWorkoutsService);
+    service = TestBed.inject(DataWorkoutsService);
   });
 
   it('should be created', () => {

@@ -1,0 +1,23 @@
+:host {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    row-gap: 1em;
+    height: 100%;
+}
+
+.header {
+    padding-left: .5em;
+    padding-right: 1em;
+}
+
+.content {
+    padding-left: .5em;
+    padding-right: 1em;
+    overflow: auto;
+    }
+    
+.footer {
+    padding-left: .5em;
+    padding-right: 1em;
+    padding-bottom: .5em;   
+}
