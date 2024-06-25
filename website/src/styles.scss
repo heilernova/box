@@ -4,17 +4,18 @@
 @use '@angular/material' as mat;
 // Plus imports for other components in your app.
 
+@import "@angular/material/prebuilt-themes/azure-blue.css";
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
 @include mat.core();
 
 // Define the theme object.
-$la-casa-imperial-webpanel-theme: mat.define-theme((
+$light-theme: mat.define-theme((
   color: (
     theme-type: light,
-    primary: mat.$azure-palette,
-    tertiary: mat.$blue-palette,
+    primary: mat.$red-palette,
+    tertiary: mat.$azure-palette,
   ),
   density: (
     scale: 0,
@@ -38,7 +39,7 @@ $dark-theme: mat.define-theme((
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 :root {
-  @include mat.all-component-themes($la-casa-imperial-webpanel-theme);
+  @include mat.all-component-themes($light-theme);
   --body-background-color: #FFFFFF;
   --body-color: #1F1F1F;
   

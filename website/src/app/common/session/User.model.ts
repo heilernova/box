@@ -1,3 +1,6 @@
+import { inject } from "@angular/core";
+import { ApiRmsService } from "../api/rms";
+
 export interface IUserData {
     id: string,
     role: 'admin' | 'user';
@@ -13,7 +16,23 @@ export interface IUserData {
     rms?: any[];
 }
 
+export interface IRm {
+    id: string;
+    nameInEnglish: string,
+    nameInSpanish: string,
+    abbreviation: string | null,
+    slug: string,
+    record?: {
+      id: string;
+      createAt: string;
+      weightInKilos: number;
+      weightInPounds: number
+    }
+}
+
 export class User {
+    private readonly _apiRms: ApiRmsService;
+
     public readonly id: string;
     public readonly role: 'admin' | 'user';
     public readonly username: string;
@@ -25,9 +44,10 @@ export class User {
     public readonly tall: number;
     public readonly weight: number;
     public readonly token: string;
-    public rms: any[] = [];
+    private rms: IRm[] = [];
     
-    constructor(data: IUserData){
+    constructor(data: IUserData, apiRms: ApiRmsService){
+        this._apiRms = apiRms;
         this.id = data.id;
         this.role = data.role;
         this.username = data.username;
@@ -58,6 +78,39 @@ export class User {
             weight: this.weight,
             token: this.token,
             rms: this.rms
+        })
+    }
+
+    getRMs(): Promise<IRm[]> {
+        return new Promise((resolve) => {
+            if (this.rms.length > 0){
+                resolve(this.rms);
+                return;
+            }
+
+            this._apiRms.getAll().subscribe({
+                next: list => {
+                    this.rms = list.map(x => {
+                        return {
+                            id: x.id,
+                            nameInEnglish: x.name_in_english,
+                            nameInSpanish: x.name_in_spanish,
+                            abbreviation: x.abbreviation,
+                            slug: x.slug,
+                            record: x.record ? {
+                                id: x.record.id,
+                                createAt: x.record.create_at,
+                                weightInKilos: x.record.weight_in_kilos,
+                                weightInPounds: x.record.weight_in_pounds
+                            } : undefined
+                        }
+                    })
+                    resolve(this.rms);
+                },
+                error: err => {
+                    resolve(this.rms);
+                }
+            })
         })
     }
 }

@@ -1,0 +1,31 @@
+<app-page>
+    <app-page-content class="result">
+        @for (item of list(); track $index) {
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>{{item.nameInEnglish}}</mat-card-title>
+                    <mat-card-subtitle>
+                        @if (item.record) {
+                            {{item.record.createAt | date: 'EEE, dd \'de\' MMM \'de\' yyyy'}}
+                        }
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    @if(item.record){
+
+                        <div>
+                            {{item.record.weightInKilos}} Kilos / {{item.record.weightInPounds}} Libras
+                        </div>
+                    }
+                </mat-card-content>
+                <mat-card-actions>
+                    @if (item.record) {
+                        <button mat-flat-button style="width: 100%;">Actualizar</button>
+                    } @else { 
+                        <button mat-flat-button style="width: 100%;" color="accent">Agregar</button>
+                    }
+                </mat-card-actions>
+            </mat-card>
+        }
+    </app-page-content>
+</app-page>

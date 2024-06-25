@@ -7,6 +7,7 @@ export const routes: Routes = [
         path: '',
         loadComponent: () => import('./ui/layout/layout.component').then(x => x.LayoutComponent),
         children: [
+            { path: 'rms', loadComponent: () => import('./pages/rms-page/rms-page.component').then(x => x.RmsPageComponent) },
             { path: 'gyms', loadChildren: () => import('./pages/gyms/gyms.routes') },
             { path: 'ejercicios', loadComponent: () => import('./pages/workouts-page/workouts-page.component').then(x => x.WorkoutsPageComponent) },
             { path: 'atletas', loadComponent: () => import('./pages/athlete-list-pages/athlete-list-pages.component').then(x => x.AthleteListPagesComponent) },

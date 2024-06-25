@@ -2,12 +2,14 @@ import { Injectable, inject } from '@angular/core';
 import { ApiAuthService } from '../api/auth';
 import { User } from './User.model';
 import { BehaviorSubject } from 'rxjs';
+import { ApiRmsService } from '../api/rms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
   private readonly _apiAuth = inject(ApiAuthService);
+  private readonly _apiRMs = inject(ApiRmsService);
   private _user: User | null = null;
   public readonly changeUser = new BehaviorSubject<User | null>(null);
 
@@ -32,7 +34,7 @@ export class SessionService {
       if ( localStorage){
         let sessionJsonString: string | null = localStorage.getItem('session');
         if (sessionJsonString){
-          let user = new User(JSON.parse(sessionJsonString));
+          let user = new User(JSON.parse(sessionJsonString), this._apiRMs);
           this.setUser(user);
         }
         return true;
@@ -57,7 +59,7 @@ export class SessionService {
             tall: res.tall,
             token: res.token,
             weight: res.weight
-          });
+          }, this._apiRMs);
 
           this.setUser(user);
         },
