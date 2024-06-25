@@ -29,7 +29,6 @@ export class WorkoutsPageComponent {
     this._dataWorkouts.getAll().then(list => this.list.set(list));
     this._session.changeUser.subscribe(value => {
       if (value){
-        console.log(value);
         if (value.role == 'admin'){
           this.edit.set(true);
         } else {
