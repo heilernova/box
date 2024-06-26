@@ -1,8 +1,8 @@
 {
-  "name": "website",
-  "short_name": "website",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "BOX APP",
+  "short_name": "BOX APP",
+  "theme_color": "#0D0F15",
+  "background_color": "#0D0F15",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
