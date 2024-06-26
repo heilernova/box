@@ -36,6 +36,8 @@ export class RmsPageComponent {
           this.list.set(list);
         })
       }
+
+      this._user = value;
     })
   }
 
