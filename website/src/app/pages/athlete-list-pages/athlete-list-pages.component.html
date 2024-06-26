@@ -7,7 +7,11 @@
                 </div>
                 <div style="overflow: hidden;">
                     <div class="name">
-                        {{athlete.name}} {{athlete.lastName}}
+                        @if(athlete.alias){
+                            {{athlete.alias}}
+                        } @else  {
+                            {{athlete.name}} {{athlete.lastName}}
+                        }
                     </div>
                     <div class="username">
                         {{ '@' + athlete.username}}

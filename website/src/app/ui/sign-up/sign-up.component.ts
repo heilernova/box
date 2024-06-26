@@ -32,6 +32,7 @@ export class SignUpComponent {
   public readonly formGroup = new FormGroup({
     name: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     lastName: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
+    alias: new FormControl<string>('', { nonNullable: true  }),
     birthdate: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     sex: new FormControl<'M' | 'F' | null>(null, { validators: Validators.required }),
     tall: new FormControl<number | null>(null, { validators: Validators.required }),
@@ -58,6 +59,7 @@ export class SignUpComponent {
     this._session.signUp({
       name: values.name,
       lastName: values.lastName,
+      alias: values.alias.length > 0 ? values.alias : null,
       sex: values.sex as 'M' | 'F',
       email: values.email as string,
       birthdate: values.birthdate,

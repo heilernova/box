@@ -14,6 +14,7 @@ export const routes: Routes = [
             { path: 'wods', loadComponent: () => import('./pages/wods-page/wods-page.component').then(x => x.WodsPageComponent) },
             { path: 'menu', loadComponent: () => import('./pages/menu-page/menu-page.component').then(x => x.MenuPageComponent) },
             { path: 'competencias', loadComponent: () => import('./pages/competencies-page/competencies-page.component').then(x => x.CompetenciesPageComponent) },
+            { path: 'perfil', loadComponent: () => import('./pages/profile-page/profile-page.component').then(x => x.ProfilePageComponent) },
             { path: '**', loadComponent: () => import('./pages/not-found-page/not-found-page.component').then(x => x.NotFoundPageComponent) },
         ]
     }

@@ -17,6 +17,7 @@ export class AthletesDataService {
               username: x.username,
               name: x.name,
               lastName: x.last_name,
+              alias: x.alias,
               sex: x.sex,
               tall: x.tall,
               weight: x.weight,
@@ -38,6 +39,7 @@ export interface IAthlete {
   username: string;
   name: string;
   lastName: string;
+  alias: string | null;
   sex: "M" | "F";
   isCoach: boolean;
   tall: number;

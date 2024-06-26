@@ -1,0 +1,13 @@
+form {
+    padding-top: 1em;
+
+    .inputs {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .actions {
+        display: flex;
+        flex-direction: column;
+    }
+}

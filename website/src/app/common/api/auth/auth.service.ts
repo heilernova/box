@@ -28,6 +28,7 @@ export interface APIAuthResponse {
   username: string,
   name: string,
   last_name: string,
+  alias: string | null,
   is_coach: boolean,
   birthdate: string,
   sex: "M" | "F",
@@ -42,6 +43,7 @@ export interface APIAuthSignUpData {
   email: string;
   name: string;
   last_name: string;
+  alias: string | null;
   sex: "M" | "F";
   birthdate: Date | string;
   cellphone: string;

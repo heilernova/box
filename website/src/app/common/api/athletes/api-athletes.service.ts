@@ -17,6 +17,7 @@ export interface APIAthleteInfo {
   username: string,
   name: string,
   last_name: string,
+  alias: string | null,
   sex: "M" | "F",
   is_coach: boolean,
   tall: number,

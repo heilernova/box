@@ -7,6 +7,7 @@ export interface IUserData {
     username: string,
     name: string,
     lastName: string,
+    alias: string | null,
     isCoach: boolean,
     birthdate: string,
     sex: "M" | "F",
@@ -37,6 +38,7 @@ export class User {
     public readonly role: 'admin' | 'user';
     public readonly username: string;
     public readonly name: string;
+    public readonly alias: string | null;
     public readonly lastName: string;
     public readonly isCoach: boolean;
     public readonly birthdate: Date;
@@ -53,6 +55,7 @@ export class User {
         this.username = data.username;
         this.name = data.name;
         this.lastName = data.lastName;
+        this.alias = data.alias;
         this.isCoach = data.isCoach;
         this.birthdate = new Date(data.birthdate);
         this.sex = data.sex;
@@ -71,6 +74,7 @@ export class User {
             username: this.username,
             name: this.name,
             lastName: this.lastName,
+            alias: this.alias,
             isCoach: this.isCoach,
             birthdate: this.birthdate,
             sex: this.sex,

@@ -26,6 +26,7 @@ export class ProfileService {
 export interface APIProfileInfo {
   name: string;
   last_name: string;
+  alias: string | null;
   is_coach: boolean;
   birthdate: string;
   sex: "M" | "F";
@@ -39,6 +40,7 @@ export interface APIProfileInfo {
 export interface APIProfileUpdate {
   name?: string;
   last_name?: string;
+  alias?: string | null;
   birthdate?: string;
   sex?: "M" | "F";
   tall?: number;

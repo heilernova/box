@@ -14,6 +14,10 @@
                <input matInput formControlName="lastName">
             </mat-form-field>
             <mat-form-field>
+               <mat-label>Alias o nombre corto</mat-label> 
+               <input matInput formControlName="alias">
+            </mat-form-field>
+            <mat-form-field>
                <mat-label>Fecha de nacimiento</mat-label> 
                <input matInput formControlName="birthdate" type="date">
             </mat-form-field>
@@ -38,6 +42,11 @@
             </div>
 
             <mat-divider style="margin-bottom: 1em;"/>
+
+            <mat-form-field>
+                <mat-label>usuario</mat-label> 
+                <input matInput formControlName="username">
+            </mat-form-field>
             
             <mat-form-field>
                 <mat-label>Correo electrónico</mat-label> 
@@ -48,10 +57,6 @@
                 <mat-input-cellphone matInput formControlName="cellphone"/>
             </mat-form-field>
             
-            <mat-form-field>
-                <mat-label>usuario</mat-label> 
-                <input matInput formControlName="username">
-            </mat-form-field>
             
             <mat-divider style="margin-bottom: 1em;"/>
 
