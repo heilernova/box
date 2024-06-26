@@ -31,11 +31,6 @@ export class AppComponent {
           })
         }
       }
-      //   if ("serviceWorker" in navigator) {
-      //     if (typeof window == 'object'){
-      //     }
-      //   }
-      // }
     }
   }
 }

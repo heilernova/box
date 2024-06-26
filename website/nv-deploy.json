@@ -1,0 +1,12 @@
+{
+    "apps": [
+        {
+            "id": "b93a732f269f",
+            "server": "https://server.novah.dev",
+            "domain": "box.novah.dev",
+            "name": "Website",
+            "location": "./dist/website",
+            "include": []
+        }
+    ]
+}

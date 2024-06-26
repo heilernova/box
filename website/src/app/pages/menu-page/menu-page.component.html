@@ -1,0 +1,22 @@
+
+<section>
+    <mat-card routerLink="/gyms">
+        <mat-card-content>
+            <mat-card-title>Gyms</mat-card-title>
+        </mat-card-content>
+    </mat-card>
+</section>
+
+@if(swEnable()){
+    <section>
+        <mat-card>
+            <mat-card-content>
+                <mat-card-title>Actualizar aplicación</mat-card-title>
+                <mat-card-subtitle>v0.0.1</mat-card-subtitle>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button (click)="onClickUpdate()">Buscar actualización</button>
+            </mat-card-actions>
+        </mat-card>
+    </section>
+}
