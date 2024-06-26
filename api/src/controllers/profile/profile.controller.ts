@@ -21,6 +21,7 @@ export class ProfileController {
         return {
             name: user.name,
             last_name: user.last_name,
+            alias: user.alias,
             is_coach: user.is_coach,
             birthdate: user.birthdate,
             sex: user.sex,
