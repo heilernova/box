@@ -13,11 +13,22 @@ export class ApiWorkoutsService {
     return this._http.get<APIWorkout[]>('workouts');
   }
 
+  get(value: string): Observable<APIWorkout> {
+    return this._http.get<APIWorkout>(`workouts/${value}`);
+  }
+
   create(data: APIWorkoutCreate): Observable<APIWorkout> {
     return this._http.post<APIWorkout>('workouts', data);
   }
-}
 
+  update(id: string, data: APIWorkoutUpdate): Observable<APIWorkout> {
+    return this._http.put<APIWorkout>(`workouts/${id}`, data);
+  }
+
+  delete(id: string): Observable<void> {
+    return this._http.delete<void>(`workouts/${id}`);
+  }
+}
 
 export interface APIWorkout {
   id: string,
@@ -34,7 +45,16 @@ export interface APIWorkout {
 }
 
 export interface APIWorkoutCreate {
+  name_in_english: string,
+  name_in_spanish: string | null,
+  abbreviation: string | null,
+  rm: boolean,
+  pr: boolean,
+  youtube?: string | null,
+  description?: string | null
+}
 
+export interface APIWorkoutUpdate {
   name_in_english: string,
   name_in_spanish: string | null,
   abbreviation: string | null,

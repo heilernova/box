@@ -1,0 +1,14 @@
+
+@if (title()){
+    <h2 mat-dialog-title>{{title()}}</h2>
+}
+
+@if(message()){
+    <mat-dialog-content>
+        <p>{{message()}}</p>
+    </mat-dialog-content>
+}
+<mat-dialog-actions align="end">
+    <button mat-stroked-button [matDialogClose]="false">No</button>
+    <button mat-stroked-button color="primary" [matDialogClose]="true">Si</button>
+</mat-dialog-actions>

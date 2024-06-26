@@ -8,6 +8,7 @@ import { PageModule } from '@app/ui/page';
 
 import { MatDialog } from '@angular/material/dialog';
 import { WorkoutFormDlgComponent } from '@app/ui/workout-form-dlg/workout-form-dlg.component';
+import { MessageBoxService } from '@app/ui/message-box';
 
 @Component({
   selector: 'app-workouts-page',
@@ -25,6 +26,7 @@ export class WorkoutsPageComponent {
   private _dataWorkouts = inject(DataWorkoutsService);
   private _session = inject(SessionService);
   private _matDialog = inject(MatDialog);
+  private readonly _messageBox = inject(MessageBoxService)
 
   public readonly list = signal<Workout[]>([]);
   public readonly edit = signal<boolean>(false);
@@ -46,6 +48,34 @@ export class WorkoutsPageComponent {
   }
 
   onClickNewWorkout(): void {
-    this._matDialog.open(WorkoutFormDlgComponent, { width: '100%', maxWidth: '700px'});
+    this._matDialog.open(WorkoutFormDlgComponent, { width: '100%', maxWidth: '700px'}).afterClosed().subscribe((value: Workout | undefined) => {
+      if (value){
+        this.list.update(list => [...list, value]);
+      }
+    });
+  }
+  
+  onClickEdit(workout: Workout): void {
+    this._matDialog.open(WorkoutFormDlgComponent, { data: workout, width: '100%', maxWidth: '700px'});
+  }
+
+  onClickDelete(workoutId: string): void {
+    this._messageBox.confirm({ title: '¿Desea eliminar el ejercicio?' }).then(res => {
+      if (res){
+        this._dataWorkouts.delete(workoutId)
+        .then(() => {
+          this.list.update(list => {
+            let index = list.findIndex(x => x.id == workoutId);
+            if (index > -1) {
+              list.splice(index, 1);
+            }
+            return list;
+          });
+        })
+        .catch(err => {
+
+        })
+      }
+    })
   }
 }

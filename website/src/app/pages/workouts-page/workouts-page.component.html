@@ -18,10 +18,10 @@
                 </mat-card-header>
                 <mat-card-actions>
                     @if (edit()) {
-                        <button mat-button>Editar</button>
-                        <button mat-button>Eliminar</button>
+                        <button mat-button (click)="onClickEdit(item)">Editar</button>
+                        <button mat-button (click)="onClickDelete(item.id)">Eliminar</button>
                     }
-                    <button mat-button>Ver video</button>
+                    <button mat-button disabled>Ver video</button>
                 </mat-card-actions>
             </mat-card>
         }
