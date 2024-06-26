@@ -21,7 +21,7 @@ export class UsersService {
     }
 
     async create(data: IUserCreate): Promise<IUser> {
-        return (await this._db.insert<IUserDbRow>('users', this.parseValues(data))).rows[0];
+        return (await this._db.insert<IUserDbRow>('users', this.parseValues(data), '*')).rows[0];
     }
 
     async get(value: string): Promise<IUser | undefined> {
