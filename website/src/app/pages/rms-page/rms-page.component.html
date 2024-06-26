@@ -1,4 +1,7 @@
 <app-page>
+    <app-page-header>
+        <button mat-stroked-button (click)="onClickUpdateData()">Actualizar datos</button>
+    </app-page-header>
     <app-page-content class="result">
         @for (item of list(); track $index) {
             <mat-card>

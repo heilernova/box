@@ -81,9 +81,9 @@ export class User {
         })
     }
 
-    getRMs(): Promise<IRm[]> {
+    getRMs(refresh?: boolean): Promise<IRm[]> {
         return new Promise((resolve) => {
-            if (this.rms.length > 0){
+            if (this.rms.length > 0 && !refresh){
                 resolve(this.rms);
                 return;
             }
