@@ -19,8 +19,14 @@ export class ProfileUpdateDto {
     name!: string;
 
     @IsString()
+    @MaxLength(20)
     @IsOptional()
     last_name!: string;
+
+    @IsString()
+    @MaxLength(30)
+    @IsOptional()
+    alias!: string | null;
 
     @IsIn(['M', 'F'])
     @IsOptional()

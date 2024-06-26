@@ -15,6 +15,7 @@ export class AthletesController {
                 username: x.username,
                 name: x.name,
                 last_name: x.last_name,
+                alias: x.alias,
                 sex: x.sex,
                 is_coach: x.is_coach,
                 tall: x.tall,

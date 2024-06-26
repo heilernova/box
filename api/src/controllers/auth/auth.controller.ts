@@ -15,7 +15,7 @@ export class AuthController {
     ){}
 
     @Post('sign-in')
-    async name(@Body() credentials: CredentialsDto) {
+    async name(@Body() credentials: CredentialsDto): Promise<IResponseAuth> {
         let user = await this._users.get(credentials.username);
         let token: string;
         if (!user) throw new HttpException(`Tú ${isEmail(credentials.username) ? 'correo electrónico' : 'usuario'} es incorrecto`, 400);
@@ -27,6 +27,7 @@ export class AuthController {
             username: user.username,
             name: user.name,
             last_name: user.last_name,
+            alias: user.alias,
             is_coach: user.is_coach,
             birthdate: user.birthdate,
             sex: user.sex,
@@ -37,7 +38,7 @@ export class AuthController {
     }
 
     @Post('sign-up')
-    async signUp(@Body() data: SignUpBody){
+    async signUp(@Body() data: SignUpBody): Promise<IResponseAuth>{
         let validation = await this._validators.emailAndUsername(data.email, data.username);
         if (!validation.email || !validation.username){
             if (validation.email == validation.email){
@@ -56,6 +57,7 @@ export class AuthController {
             username: user.username,
             name: user.name,
             last_name: user.last_name,
+            alias: user.alias,
             is_coach: user.is_coach,
             birthdate: user.birthdate,
             sex: user.sex,
@@ -78,6 +80,7 @@ export class AuthController {
             username: user.username,
             name: user.name,
             last_name: user.last_name,
+            alias: user.alias,
             is_coach: user.is_coach,
             birthdate: user.birthdate,
             sex: user.sex,
@@ -94,6 +97,7 @@ export interface IResponseAuth {
     username: string;
     name: string;
     last_name: string;
+    alias: string | null;
     is_coach: boolean;
     birthdate: Date;
     tall: number;
