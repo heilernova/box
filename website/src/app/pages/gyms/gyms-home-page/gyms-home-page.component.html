@@ -14,7 +14,7 @@
     
         <mat-card-content>
             @if(gym.googleMaps){
-                <a [href]="gym.googleMaps" target="_blank" rel="noopener noreferrer">
+                <a [href]="gym.googleMaps" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
                     <i class="fa-solid fa-location-dot"></i>
                     Como llegar
                 </a>
@@ -22,7 +22,11 @@
         </mat-card-content>
     
         <mat-card-actions>
-            <button mat-button>Contactar por WhatsApp</button>
+            @if (gym.whatsApp){
+                <a [href]="gym.whatsApp" mat-button target="_blank">Contactar por WhatsApp</a>
+            } @else {
+                <button mat-button disabled>Contactar por WhatsApp</button>
+            }
         </mat-card-actions>
     </mat-card>
 }

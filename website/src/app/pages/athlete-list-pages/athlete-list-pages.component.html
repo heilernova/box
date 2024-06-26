@@ -1,16 +1,19 @@
 @for (athlete of list(); track $index) {
-    <mat-card>
-        <mat-card-header>
-            <div mat-card-avatar class="avatar">
-                <img height="50" src="https://scontent.fbog16-1.fna.fbcdn.net/v/t39.30808-1/308586933_204586025292567_1788156226192234888_n.png?stp=dst-png_p200x200&_nc_cat=111&ccb=1-7&_nc_sid=f4b9fd&_nc_ohc=ElpLTFuquUoQ7kNvgFbzLRN&_nc_ht=scontent.fbog16-1.fna&oh=00_AYAuUX533ef6gXCt2AqA4n9xQv-nsiCkgif13iDON75B4w&oe=6680B270">
-            </div>
-            <mat-card-title>
-                <div class="name">
-                    {{athlete.name}} {{athlete.lastName}}
+    <mat-card >
+        <mat-card-content style="overflow: hidden;">
+            <div class="info">
+                <div class="avatar">
+                    <img src="https://scontent.fbog16-1.fna.fbcdn.net/v/t39.30808-1/308586933_204586025292567_1788156226192234888_n.png?stp=dst-png_p200x200&_nc_cat=111&ccb=1-7&_nc_sid=f4b9fd&_nc_ohc=ElpLTFuquUoQ7kNvgFbzLRN&_nc_ht=scontent.fbog16-1.fna&oh=00_AYAuUX533ef6gXCt2AqA4n9xQv-nsiCkgif13iDON75B4w&oe=6680B270">
                 </div>
-            </mat-card-title>
-            <mat-card-subtitle>{{ '@' + athlete.username}}</mat-card-subtitle>
-        </mat-card-header>
-        <!-- <mat-card-actions></mat-card-actions> -->
+                <div style="overflow: hidden;">
+                    <div class="name">
+                        {{athlete.name}} {{athlete.lastName}}
+                    </div>
+                    <div class="username">
+                        {{ '@' + athlete.username}}
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
     </mat-card>
 }

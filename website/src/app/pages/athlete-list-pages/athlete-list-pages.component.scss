@@ -5,15 +5,37 @@
     gap: 1em;
 }
 
-.avatar {
-    img {
-        border-radius: 50px;
-    }
-}
+// .avatar {
+//     img {
+//         border-radius: 50px;
+//     }
+// }
 
-.name {
-    max-width: 200px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+// .name {
+//     max-width: 200px;
+//     overflow: hidden;
+//     white-space: nowrap;
+//     text-overflow: ellipsis;
+// }
+
+.info {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: .5em;
+    .avatar {
+        img {
+            height: 50px;
+            border-radius: 50%;
+        }
+
+    }
+    
+    .name {
+        font-size: 1.3em;
+        font-weight: 500;
+        
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
 }
