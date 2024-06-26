@@ -15,6 +15,7 @@ export class UsersService {
     private parseValues<T = IUserCreate | IUserUpdate>(value: IUserCreate | IUserUpdate): T {
         if (value.email) value.email = value.email.toLowerCase();
         if (value.name) value.name = capitalize(value.name);
+        if (value.alias) value.alias =capitalize(value.alias);
         if (value.last_name) value.last_name = capitalize(value.last_name);
         if (value.password) value.password = hashSync(value.password, 10);
         return value as T;
