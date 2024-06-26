@@ -73,6 +73,43 @@ export class SessionService {
     })
   }
 
+  signUp(data: { name: string, lastName: string, sex: 'M' | 'F', birthdate: Date | string, tall: number, weight: number, email: string, cellphone: string, username: string, password: string }){
+    return new Promise((resolve, reject) => {
+      this._apiAuth.signUp({
+        name: data.name,
+        last_name: data.lastName,
+        sex: data.sex,
+        tall: data.tall,
+        weight: data.weight,
+        email: data.email,
+        cellphone: data.cellphone,
+        username: data.username,
+        password: data.password,
+        birthdate: data.birthdate,
+        country: 'CO'
+      }).subscribe({
+        next: res => {
+          let user = new User({
+            id: res.id,
+            role: res.role,
+            username: res.username,
+            name: res.name,
+            lastName: res.last_name,
+            sex: res.sex,
+            isCoach: res.is_coach,
+            birthdate: res.birthdate,
+            tall: res.tall,
+            token: res.token,
+            weight: res.weight
+          }, this._apiRMs);
+          this.setUser(user);
+          resolve(user);
+        },
+        error: err => reject(err)
+      })
+    })
+  }
+
   logout(){
     this.setUser(null);
   }

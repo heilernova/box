@@ -13,6 +13,10 @@
                <mat-label>Apellido</mat-label> 
                <input matInput formControlName="lastName">
             </mat-form-field>
+            <mat-form-field>
+               <mat-label>Fecha de nacimiento</mat-label> 
+               <input matInput formControlName="birthdate" type="date">
+            </mat-form-field>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 5em), 1fr)); column-gap: 1em;">
                 <mat-form-field>
@@ -46,28 +50,28 @@
             
             <mat-form-field>
                 <mat-label>usuario</mat-label> 
-                <mat-input-number matInput formControlName="username"/>
+                <input matInput formControlName="username">
             </mat-form-field>
             
             <mat-divider style="margin-bottom: 1em;"/>
 
             <mat-form-field>
                <mat-label>Contraseña</mat-label> 
-               <mat-input-number matInput formControlName="password"/>
+               <input matInput formControlName="password"/>
             </mat-form-field>
 
             <mat-form-field>
                <mat-label>Confirmar contraseña</mat-label> 
-               <mat-input-number matInput formControlName="confirmPassword"/>
+               <input matInput formControlName="confirmPassword"/>
             </mat-form-field>
 
 
         </div>
         <div class="actions">
-            <button mat-flat-button>
+            <button mat-flat-button (click)="onSave()">
                 Registrarse
             </button>
-            <button mat-button color="accent" routerLink="/sign-in">
+            <button mat-button color="accent" routerLink="/login">
                 Iniciar sesión
             </button>
         </div>
