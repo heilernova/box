@@ -1,0 +1,14 @@
+{
+    "apps": [
+        {
+            "id": "5c1bc589519a",
+            "server": "https://server.novah.dev",
+            "domain": "box.novah.dev",
+            "name": "API",
+            "location": "./dist",
+            "include": [
+                "package.json"
+            ]
+        }
+    ]
+}
