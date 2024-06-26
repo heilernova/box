@@ -46,6 +46,7 @@ export class ProfilePageComponent {
   constructor(){
     this._apiProfile.getInfo().subscribe({
       next: res => {
+        console.log(res);
         this.formGroup.setValue({
           name: res.name,
           lastName: res.last_name,
