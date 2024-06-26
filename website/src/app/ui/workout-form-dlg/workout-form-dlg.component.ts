@@ -37,6 +37,15 @@ export class WorkoutFormDlgComponent {
 
   constructor(@Inject(MAT_DIALOG_DATA) data?: Workout){
     this._workout = data;
+    if (data){
+      this.formGroup.setValue({
+        nameInEnglish: data.nameInEnglish,
+        nameInSpanish: data.nameInSpanish,
+        abbreviation: data.abbreviation,
+        pr: data.pr,
+        rm: data.rm
+      })
+    }
   }
 
   onClickSave(): void {
@@ -50,8 +59,8 @@ export class WorkoutFormDlgComponent {
 
       this._workout.update({
         nameInEnglish: value.nameInEnglish,
-        nameInSpanish: value.nameInSpanish,
-        abbreviation: value.abbreviation,
+        nameInSpanish: value.nameInSpanish ? (value.nameInSpanish.length == 0 ? value.nameInSpanish : null) : null,
+        abbreviation: value.abbreviation ? (value.abbreviation.length == 0 ? value.abbreviation : null) : null,
         pr: value.pr as boolean,
         rm: value.rm as boolean,
         description: null,
@@ -64,8 +73,8 @@ export class WorkoutFormDlgComponent {
     } else {
       this._dataWorkouts.create({
         nameInEnglish: value.nameInEnglish,
-        nameInSpanish: value.nameInSpanish,
-        abbreviation: value.abbreviation,
+        nameInSpanish: value.nameInSpanish ? (value.nameInSpanish.length == 0 ? value.nameInSpanish : null) : null,
+        abbreviation: value.abbreviation ? (value.abbreviation.length == 0 ? value.abbreviation : null) : null,
         pr: value.pr as boolean,
         rm: value.rm as boolean,
         description: null,
