@@ -1,6 +1,6 @@
 import { WorkoutsService } from '@app/common/models/workouts';
 import { IWorkout } from '@app/common/models/workouts/workouts.interfaces';
-import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { WorkoutCreateDto } from './dto/workout-create.dto';
 import { WorkoutPipe } from '@app/pipes';
 import { WorkoutUpdateDto } from './dto/workout-update.dto';
@@ -34,5 +34,10 @@ export class WorkoutsController {
     @RequirePermissions(Permission.WORKOUT_UPDATE)
     async update(@Param('slug', WorkoutPipe) workout: IWorkout, @Body() data: WorkoutUpdateDto){
         await this._workouts.update(workout.id, data);
+    }
+
+    @Delete(':slug')
+    async delete(@Param('slug', WorkoutPipe) workout: IWorkout) {
+        return this._workouts.delete(workout.id);
     }
 }
