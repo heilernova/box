@@ -20,9 +20,9 @@
                 </mat-card-content>
                 <mat-card-actions>
                     @if (item.record) {
-                        <button mat-flat-button style="width: 100%;">Actualizar</button>
+                        <button mat-flat-button style="width: 100%;" (click)="onClickUpdate(item)">Actualizar</button>
                     } @else { 
-                        <button mat-flat-button style="width: 100%;" color="accent">Agregar</button>
+                        <button mat-flat-button style="width: 100%;" color="accent" (click)="onClickUpdate(item)">Agregar</button>
                     }
                 </mat-card-actions>
             </mat-card>
