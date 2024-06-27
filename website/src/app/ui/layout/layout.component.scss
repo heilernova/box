@@ -95,6 +95,9 @@ section {
                     flex-direction: column;
                     text-decoration: none;
                     color: inherit;
+                    &.active {
+                        color: #3399FF;
+                    }
                     .icon {
                         display: flex;
                         justify-content: center;
