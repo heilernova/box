@@ -1,7 +1,7 @@
 import { IUser, UserRecordRmsService, UserRecordWeightService, UsersService, UserValidatorsService } from '@app/common/models/users';
 import { ISessionData, Session, SessionAuthGuard } from '@app/common/session';
 import { Body, Controller, Get, HttpException, Patch, Post, Put, UseGuards } from '@nestjs/common';
-import { ProfileUpdateDto, RmRecordDto, UpdatePasswordDto } from './dto';
+import { ProfileUpdateDto, UpdatePasswordDto } from './dto';
 import { compareSync } from 'bcrypt';
 
 @UseGuards(SessionAuthGuard)
@@ -60,38 +60,6 @@ export class ProfileController {
         if (!compareSync(data.password, user.password)) throw new HttpException('Tú contraseña es incorrecta', 400);
         this._users.update(user.id, { password: data.new_password });
         return;
-    }
-
-    @Get('rms')
-    async getRMS(@Session('data') sessionData: ISessionData){
-        return (await this._rms.get(sessionData.id)).map(x => {
-            return {
-                id: x.workout_id,
-                name_in_english: x.name_in_english,
-                name_in_spanish: x.name_in_spanish,
-                abbreviation: x.abbreviation,
-                slug: x.slug,
-                record: x.record_id ? {
-                    id: x.record_id,
-                    create_at: x.create_at,
-                    weight_in_kilos: x.weight_in_kilos,
-                    weight_in_pounds: x.weight_in_pounds
-                } : null    
-            }
-        });
-    }
-
-    @Post('rms')
-    async recordRM(@Session('data') sessionData: ISessionData, @Body() data: RmRecordDto){
-        let user: IUser | undefined = await this._users.get(sessionData.id);
-        if (!user) throw new HttpException('Usuario no encontrado', 400);
-        let result = await this._rms.register({ user_id: sessionData.id, ...data });
-        return {
-            id: result.id,
-            create_at: result.create_at,
-            weight_in_kilos: data.weight_in_kilos,
-            weight_in_pounds: data.weight_in_pounds
-        }
     }
 
     @Get('records/weight')
