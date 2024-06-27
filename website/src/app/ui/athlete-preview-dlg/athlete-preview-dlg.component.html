@@ -18,18 +18,29 @@
         </div>
 
         <section class="rms">
-            <ul>
-                @for (rm of rms(); track $index) {
-                    <li>
-                        <div>{{rm.nameInEnglish}}</div>
-                        @if (rm.record) {
-                            <div>{{rm.record.weightInKilos}} Kg / {{rm.record.weightInPounds}} Lbs</div>
-                        } @else {
-                            <div>Sin Datos</div>
-                        }
-                    </li>
-                }
-            </ul>
+            @if (loadingRMs()){
+                <div style="width: 100%; display: flex; justify-content: center;">
+                    <div style="display: flex; align-items: center; column-gap: 1em;">
+                        <mat-spinner diameter="30"/>
+                        <div style="font-size: 1.1em;">Cargando RMs</div>
+                    </div>
+                </div>
+            } @else {
+                <ul>
+                    @for (rm of rms(); track $index) {
+                        <li>
+                            <div>{{rm.nameInEnglish}}</div>
+                            @if (rm.record) {
+                                <div>{{rm.record.weightInKilos}} Kg / {{rm.record.weightInPounds}} Lbs</div>
+                            } @else {
+                                <div>Sin Datos</div>
+                            }
+                        </li>
+                    } @empty {
+                        No tiene registros de RMs
+                    }
+                </ul>
+            }
         </section>
     </div>
 </mat-dialog-content>
