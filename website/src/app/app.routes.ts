@@ -8,6 +8,7 @@ export const routes: Routes = [
         loadComponent: () => import('./ui/layout/layout.component').then(x => x.LayoutComponent),
         children: [
             { path: 'ejercicios', loadChildren: () => import('./pages/workouts/workouts.routes') },
+            { path: 'rms', loadChildren: () => import('./pages/rms/rms.routes') },
             // { path: 'rms', loadComponent: () => import('./pages/rms-page/rms-page.component').then(x => x.RmsPageComponent) },
             // { path: 'gyms', loadChildren: () => import('./pages/gyms/gyms.routes') },
             // { path: 'ejercicios', loadComponent: () => import('./pages/workouts-page/workouts-page.component').then(x => x.WorkoutsPageComponent) },

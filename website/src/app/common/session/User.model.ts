@@ -31,6 +31,13 @@ export interface IRm {
     }
 }
 
+export interface IRmRecord {
+    id: string;
+    createAt: string;
+    weightInKilos: number;
+    weightInPounds: number
+}
+
 export class User {
     private readonly _apiRms: ApiRmsService;
 

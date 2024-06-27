@@ -1,0 +1,36 @@
+    <h2 mat-dialog-title>{{nameInEnglish()}}</h2>
+    <mat-dialog-content>
+        @if (record()) {
+            <div>
+                <div class="date">{{record()?.createAt | date: 'EEE, dd \'de\' MMM \'de\' yyyy'}}</div>
+                <div style="font-size: 1.5em; padding: .5em;">
+                    {{record()?.weightInKilos}} Kilos  / {{record()?.weightInPounds}} Libras
+                </div>
+            </div>
+
+            <div style="padding-top: 1em; display: flex; align-items: center; column-gap: .5em;">
+                <mat-form-field style="width: 12em;" class="mat-input-low">
+                    <mat-label>Porcentaje</mat-label>
+                    <mat-input-number type="percentage" align="center" [formControl]="formGroup.controls.percentage"/>
+                </mat-form-field>
+                <div style="font-size: 2em; padding: 0.5em;">
+                    =
+                </div>
+                
+                <mat-form-field style="width: 9em;" class="mat-input-low">
+                    <mat-label>Kilos</mat-label>
+                    <mat-input-number align="center" [formControl]="formGroup.controls.value"/>
+                </mat-form-field>
+                
+                <mat-form-field Libras="width: 9em;" class="mat-input-low">
+                    <mat-label>Libras</mat-label>
+                    <mat-input-number align="center" [formControl]="formGroup.controls.pounds"/>
+                </mat-form-field>
+            </div>
+        }
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button>
+            Actualizar RM
+        </button>
+    </mat-dialog-actions>

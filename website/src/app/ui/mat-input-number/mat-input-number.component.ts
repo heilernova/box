@@ -106,7 +106,7 @@ export class MatInputNumber implements MatFormFieldControl<number>, ControlValue
   set type(value: 'number' | 'percentage'){
     this._type = value;
     if (value == 'percentage'){
-      this.maxLength.set(2);
+      this.maxLength.set(3);
     }
   }
 

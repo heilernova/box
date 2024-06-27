@@ -1,0 +1,32 @@
+<app-page>
+    <app-page-header class="panel">
+        <mat-form-field>
+            <input matInput placeholder="Buscar" [(ngModel)]="inputValue">
+        </mat-form-field>
+        <button mat-stroked-button (click)="onClickReloadRMs()">
+            <i class="fa-solid fa-rotate-right"></i>
+            <span>
+                Actualizar datos
+            </span>
+        </button>
+    </app-page-header>
+    <app-page-content class="result">
+        @for (rm of list(); track $index) {
+            <mat-card (click)="onClickOpenPreview(rm)">
+                <mat-card-header>
+                    <mat-card-title>{{rm.nameInEnglish}} @if(rm.abbreviation) { <strong>({{rm.abbreviation}})</strong> } @if(rm.nameInSpanish) { - {{rm.nameInSpanish}} } </mat-card-title>
+                    @if (rm.record){
+                        <mat-card-subtitle class="date">{{rm.record.createAt | date: 'EEE, dd \'de\' MMM \'de\' yyyy'}}</mat-card-subtitle>
+                    }
+                </mat-card-header>
+                <mat-card-content>
+                    @if(rm.record){
+                        <div style="font-size: 1.2em; padding: .5em;">
+                            {{rm.record.weightInKilos}} Kilos  / {{rm.record.weightInPounds}} Libras
+                        </div>
+                    }
+                </mat-card-content>
+            </mat-card>
+        }
+    </app-page-content>
+</app-page>
