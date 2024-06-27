@@ -32,7 +32,7 @@ export class UpdateRmDlgComponent {
   public readonly workoutName = signal<string>('');
   public readonly formGroup = new FormGroup({
     unit: new FormControl<'kilos' | 'pounds'>('kilos', { nonNullable: true, validators: Validators.required }),
-    value: new FormControl<number>(0, { nonNullable: true, validators: Validators.required })
+    value: new FormControl<number>(0, { nonNullable: true, validators: [Validators.required, Validators.min(1)] })
   });
 
   constructor(@Inject(MAT_DIALOG_DATA) private readonly data: IRm){
@@ -46,22 +46,11 @@ export class UpdateRmDlgComponent {
     }
     
     let formValues = this.formGroup.getRawValue();
-    let weightInKilos: number;
-    let weightInPounds: number;
 
-    if (formValues.unit == 'kilos'){
-      weightInKilos = formValues.value;
-      weightInPounds = Math.round(formValues.value * 2.20462);
-    } else {
-      weightInPounds = formValues.value;
-      weightInKilos = Math.round(formValues.value / 2.20462);
-    }
-
-    console.log(formValues);
     this._apiRMS.register({ 
       workout_id: this.data.id,
-      weight_in_kilos: weightInKilos,
-      weight_in_pounds: weightInPounds
+      unit: formValues.unit,
+      weight: formValues.value,
     }).subscribe({
       next: res => {
         this.data.record = {

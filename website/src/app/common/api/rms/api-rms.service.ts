@@ -13,7 +13,7 @@ export class ApiRmsService {
     return this._http.get<APIRmData[]>('profile/rms');
   }
 
-  register(data: { workout_id: string, weight_in_kilos: number, weight_in_pounds: number }): Observable<APIRmRegisterData> {
+  register(data: { workout_id: string, unit: 'kilos' | 'pounds', weight: number }): Observable<APIRmRegisterData> {
     return this._http.post<APIRmRegisterData>('profile/rms', data);
   }
 }

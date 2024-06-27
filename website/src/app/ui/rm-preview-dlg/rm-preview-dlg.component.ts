@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject, signal } from '@angular/core';
+import { Component, Inject, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { IRm, IRmRecord } from '@app/common/session/User.model';
 import { MatInputNumber } from '../mat-input-number';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { UpdateRmDlgComponent } from '../update-rm-dlg/update-rm-dlg.component';
 
 @Component({
   selector: 'app-rm-preview-dlg',
@@ -22,6 +23,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './rm-preview-dlg.component.scss'
 })
 export class RmPreviewDlgComponent {
+  private readonly _matDialog = inject(MatDialog);
   public readonly nameInEnglish = signal<string>('');
   public readonly record = signal<IRmRecord | null>(null);
 
@@ -31,7 +33,7 @@ export class RmPreviewDlgComponent {
     pounds: new FormControl<number>(0, {  nonNullable: true }),
   })
 
-  constructor(@Inject(MAT_DIALOG_DATA) data: IRm){
+  constructor(@Inject(MAT_DIALOG_DATA) private data: IRm){
     this.nameInEnglish.set(data.nameInEnglish);
     this.record.set(data.record ?? null);
 
@@ -47,5 +49,12 @@ export class RmPreviewDlgComponent {
         pounds: data.record.weightInPounds,
       })
     }
+  }
+
+  onClickUpdate(): void {
+    this._matDialog.open(UpdateRmDlgComponent, { data: this.data, width: '100%', maxWidth: '400px' }).afterClosed().subscribe(() => {
+      this.record.set(this.data.record ?? null);
+      this.formGroup.controls.percentage.setValue(this.formGroup.controls.percentage.getRawValue());
+    })
   }
 }
