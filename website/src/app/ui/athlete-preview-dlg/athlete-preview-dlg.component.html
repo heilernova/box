@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>{{data.alias ?? data.name + ' ' + data.lastName}}</h2>
+<mat-dialog-content> 
+    <div>
+        <div>
+            Nombre: {{data.name}}
+        </div>
+        <div>
+            Apellido: {{data.lastName}}
+        </div>
+        <div>
+            Edad: {{data.birthdate | age}}
+        </div>
+        <div>
+            Altura: {{data.tall}} cm
+        </div>
+        <div>
+            Peso: {{data.weight}} Kilos
+        </div>
+
+        <section class="rms">
+
+        </section>
+    </div>
+</mat-dialog-content>
