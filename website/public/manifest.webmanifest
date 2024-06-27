@@ -3,6 +3,7 @@
   "short_name": "BOX APP",
   "theme_color": "#0D0F15",
   "background_color": "#0D0F15",
+  "orientation": "portrait",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
