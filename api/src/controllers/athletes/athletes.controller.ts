@@ -1,10 +1,11 @@
-import { UsersService } from '@app/common/models/users';
-import { Controller, Get } from '@nestjs/common';
+import { UserRecordRmsService, UsersService } from '@app/common/models/users';
+import { Controller, Get, HttpException, Param } from '@nestjs/common';
 
 @Controller('athletes')
 export class AthletesController {
     constructor(
-        private readonly _users: UsersService
+        private readonly _users: UsersService,
+        private readonly _rms: UserRecordRmsService
     ){}
 
     @Get()
@@ -23,6 +24,27 @@ export class AthletesController {
                 country: x.country,
                 birthdate: x.birthdate
             };
+        });
+    }
+
+    @Get(':id/rms')
+    async getRMs(@Param('id') id: string){
+        let user = await this._users.get(id);
+        if (!user) throw new HttpException('Atleta no encontrado', 404);
+        return (await this._rms.get(user.id)).map(x => {
+            return {
+                id: x.workout_id,
+                name_in_english: x.name_in_english,
+                name_in_spanish: x.name_in_spanish,
+                abbreviation: x.abbreviation,
+                slug: x.slug,
+                record: x.record_id ? {
+                    id: x.record_id,
+                    create_at: x.create_at,
+                    weight_in_kilos: x.weight_in_kilos,
+                    weight_in_pounds: x.weight_in_pounds
+                } : null    
+            }
         });
     }
 }
