@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,10 @@ export class ApiAthletesService {
   constructor(private _http: HttpClient) { }
   getAll(){
     return this._http.get<APIAthleteInfo[]>('athletes');
+  }
+
+  getRMs(username: string): Observable<any[]>{
+    return this._http.get<any>(`athletes/${username}/rms`);
   }
 }
 

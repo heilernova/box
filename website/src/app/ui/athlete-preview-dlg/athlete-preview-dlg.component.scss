@@ -1,0 +1,16 @@
+.rms {
+    padding-top: 1em;
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: .5em;
+        flex-wrap: wrap;
+        li {
+            background-color: #0D0F15;
+            padding: .5em 1em;
+            border-radius: 8px;
+        }
+    }
+}

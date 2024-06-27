@@ -18,7 +18,18 @@
         </div>
 
         <section class="rms">
-
+            <ul>
+                @for (rm of rms(); track $index) {
+                    <li>
+                        <div>{{rm.nameInEnglish}}</div>
+                        @if (rm.record) {
+                            <div>{{rm.record.weightInKilos}} Kg / {{rm.record.weightInPounds}} Lbs</div>
+                        } @else {
+                            <div>Sin Datos</div>
+                        }
+                    </li>
+                }
+            </ul>
         </section>
     </div>
 </mat-dialog-content>

@@ -1,6 +1,9 @@
+import { ApiAthletesService } from "@app/common/api/athletes";
 import { IAthletePlain } from "./athletes.interface";
+import { IRm } from "@app/common/session/User.model";
 
 export class Athlete {
+    private readonly _api: ApiAthletesService;
     public readonly username: string;
     public readonly name: string;
     public readonly lastName: string;
@@ -11,9 +14,10 @@ export class Athlete {
     public readonly weight: number;
     public readonly country: "CO";
     public readonly birthdate: Date;
-    public readonly data: { rms: any[] } = { rms: [] }
+    private readonly data: { rms: IRm[] } = { rms: [] }
 
-    constructor(data: IAthletePlain){
+    constructor(data: IAthletePlain, api: ApiAthletesService){
+        this._api = api;
         this.username = data.username;
         this.name = data.name,
         this.lastName = data.lastName;
@@ -24,5 +28,40 @@ export class Athlete {
         this.weight = data.weight;
         this.country = data.country;
         this.birthdate = new Date(data.birthdate);
+    }
+
+
+    getRMs(refresh?: boolean): Promise<IRm[]>{
+        return new Promise((resolve) => {
+            if (!refresh && this.data.rms.length > 0){
+                resolve(this.data.rms);
+                return;
+            }
+            this._api.getRMs(this.username).subscribe({
+                next: res => {
+                    this.data.rms = res.map(x => {
+
+                        return {
+                            id: x.id,
+                            nameInEnglish: x.name_in_english,
+                            nameInSpanish: x.name_in_spanish,
+                            slug: x.slug,
+                            abbreviation: x.abbreviation,
+                            record: x.record ? {
+                                id: x.record.id,
+                                createAt: x.record.create_at,
+                                weightInKilos: x.record.weight_in_kilos,
+                                weightInPounds: x.record.weight_in_kilos,
+                            } : undefined
+                        }
+                    });
+
+                    resolve(this.data.rms);
+                },
+                error: err => {
+                    resolve([]);
+                }
+            })
+        })
     }
 }

@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { ApiAthletesService } from '@app/common/api/athletes';
 import { DataBase } from '../data.base';
 import { Athlete } from './athlete.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,7 @@ export class DataAthletesService extends DataBase<Athlete> {
               birthdate: x.birthdate,
               isCoach: x.is_coach,
               data: { rms: [] }
-            })
+            }, this._api)
           });
 
           this.setData(data);
