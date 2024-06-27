@@ -1,0 +1,23 @@
+<app-page>
+    <app-page-header class="panel">
+        <mat-form-field>
+            <input matInput placeholder="Buscar" [(ngModel)]="inputValue">
+        </mat-form-field>
+        <button mat-stroked-button (click)="onClickUpdateList()">
+            <i class="fa-solid fa-rotate-right"></i>
+            <span>
+                Actualizar datos
+            </span>
+        </button>
+    </app-page-header>
+    <app-page-content class="result">
+        @for (workout of list(); track $index) {
+            <mat-card (click)="onClickOpenPreview(workout)">
+                <mat-card-content>
+                    <mat-card-title>{{workout.nameInEnglish}} @if(workout.abbreviation) { <strong>({{workout.abbreviation}})</strong> } </mat-card-title>
+                    <mat-card-subtitle>{{workout.nameInSpanish}}</mat-card-subtitle>
+                </mat-card-content>
+            </mat-card>
+        }
+    </app-page-content>
+</app-page>

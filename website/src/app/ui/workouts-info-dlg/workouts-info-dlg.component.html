@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>{{name()}} @if(abbreviation()){ (<strong>{{abbreviation()}}</strong>) }</h2>
+<mat-dialog-actions>
+    @if (description()) {
+        <p>
+            {{description()}}
+        </p>
+    }
+</mat-dialog-actions>
+<mat-dialog-actions>
+    <button mat-button disabled>Ver mas información</button>
+    <button mat-flat-button disabled>
+        <i class="fa-brands fa-youtube"></i>
+        <span>Ver video</span>
+    </button>
+</mat-dialog-actions>
