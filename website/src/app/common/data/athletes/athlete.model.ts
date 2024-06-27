@@ -51,7 +51,7 @@ export class Athlete {
                                 id: x.record.id,
                                 createAt: x.record.create_at,
                                 weightInKilos: x.record.weight_in_kilos,
-                                weightInPounds: x.record.weight_in_kilos,
+                                weightInPounds: x.record.weight_in_pounds,
                             } : undefined
                         }
                     });
