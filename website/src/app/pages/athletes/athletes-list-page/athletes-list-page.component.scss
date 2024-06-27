@@ -10,3 +10,12 @@
     width: 100%;
     gap: .5em;
 }
+
+.name {
+    font-size: 1.3em;
+    font-weight: 500;
+    
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

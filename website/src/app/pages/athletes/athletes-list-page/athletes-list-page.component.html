@@ -1,9 +1,9 @@
 <app-page>
     <app-page-content class="result">
         @for (athlete of list(); track $index) {
-            <mat-card (click)="onClickPreview(athlete)">
+            <mat-card (click)="onClickPreview(athlete)" style="overflow: hidden;">
                 <mat-card-content>
-                    <mat-card-title>{{athlete.alias ?? (athlete.name + ' ' + athlete.lastName)}}</mat-card-title>
+                    <mat-card-title class="name">{{athlete.alias ?? (athlete.name + ' ' + athlete.lastName)}}</mat-card-title>
                     <mat-card-title><span>{{'@'}}</span>{{athlete.username}}</mat-card-title>
                 </mat-card-content>
             </mat-card>
