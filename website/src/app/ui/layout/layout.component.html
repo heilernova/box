@@ -34,14 +34,14 @@
 
     <div class="access">
         @if (user()) {
-            <div [matMenuTriggerFor]="menu">
-                {{user()?.name}} {{user()?.lastName}}
+            <div [matMenuTriggerFor]="menu" class="user cursor-pointer">
+                {{user()?.alias ?? user()?.name + ' ' + user()?.lastName  }}
             </div>
         } @else {
             <button routerLink="/login" mat-button>Iniciar sesión</button>
             <button routerLink="/registrarse" mat-button color="accent">Registrarse</button>
         }
-        <mat-menu #menu="matMenu">
+        <mat-menu #menu="matMenu" xPosition="before">
             <button mat-menu-item routerLink="/perfil">Perfil</button>
             <button mat-menu-item (click)="onClickLogout()">Cerrar sesión</button>
         </mat-menu>
