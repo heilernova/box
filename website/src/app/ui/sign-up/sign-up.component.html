@@ -1,7 +1,7 @@
 <section>
     <form [formGroup]="formGroup">
         <div class="header">
-            <div routerLink="/" style="display: flex; justify-content: center;">
+            <div class="cursor-pointer" routerLink="/" style="display: flex; justify-content: center;">
                 <img src="logo.svg" alt="Box" height="200">
             </div>
             <h2>Registro de cuenta</h2>
@@ -33,15 +33,23 @@
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field>
-                   <mat-label>Altura(cm)</mat-label> 
-                   <mat-input-number matInput formControlName="tall"/>
+                    <mat-label>Altura(cm)</mat-label> 
+                    <mat-input-number matInput formControlName="tall"/>
                 </mat-form-field>
                 <mat-form-field>
-                   <mat-label>Peso(Kg)</mat-label> 
-                   <mat-input-number matInput formControlName="weight"/>
+                    <mat-label>Peso(Kg)</mat-label> 
+                    <mat-input-number matInput formControlName="weight"/>
                 </mat-form-field>
-                
             </div>
+            
+            <mat-form-field>
+                <mat-label>País de origen</mat-label> 
+                <mat-select formControlName="country">
+                    @for (country of countries(); track $index) {
+                        <mat-option [value]="country.code">{{country.name}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
 
             <mat-divider style="margin-bottom: 1em;"/>
 
@@ -64,15 +72,15 @@
 
             <mat-form-field>
                <mat-label>Contraseña</mat-label> 
-               <input matInput formControlName="password"/>
+               <input matInput formControlName="password" [type]="hiddenPW.checked ? 'text' : 'password'"/>
             </mat-form-field>
 
             <mat-form-field>
                <mat-label>Confirmar contraseña</mat-label> 
-               <input matInput formControlName="confirmPassword"/>
+               <input matInput formControlName="confirmPassword" [type]="hiddenPW.checked ? 'text' : 'password'"/>
             </mat-form-field>
 
-
+            <mat-checkbox #hiddenPW style="color: inherit; padding-bottom: 1em;"><span style="color: whitesmoke;">Mostrar contraseñas</span></mat-checkbox>
         </div>
         <div class="actions">
             <button mat-flat-button (click)="onSave()">
