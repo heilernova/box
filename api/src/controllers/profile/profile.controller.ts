@@ -29,6 +29,7 @@ export class ProfileController {
             weight: user.weight,
             username: user.username,
             email: user.email,
+            country: user.country,
             cellphone: user.cellphone
         }
     }
