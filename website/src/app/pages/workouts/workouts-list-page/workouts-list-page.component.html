@@ -1,23 +1,54 @@
 <app-page>
     <app-page-header class="panel">
         <mat-form-field>
-            <input matInput placeholder="Buscar" [(ngModel)]="inputValue">
+            <input matInput placeholder="Buscar ejercicio" [(ngModel)]="inputValue">
         </mat-form-field>
-        <button mat-stroked-button (click)="onClickUpdateList()">
-            <i class="fa-solid fa-rotate-right"></i>
-            <span>
-                Actualizar datos
-            </span>
-        </button>
+
+        <div style="display: flex; column-gap: .5em;">
+            @if (create()) {
+                <button mat-stroked-button (click)="onClickAddWorkout()">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>
+                        Agregar nuevo ejercicio
+                    </span>
+                </button>
+            }
+            <button mat-stroked-button (click)="onClickUpdateList()">
+                <i class="fa-solid fa-rotate-right"></i>
+                <span>
+                    Actualizar datos
+                </span>
+            </button>
+        </div>
     </app-page-header>
     <app-page-content class="result">
         @for (workout of list(); track $index) {
             <mat-card (click)="onClickOpenPreview(workout)">
                 <mat-card-content>
-                    <mat-card-title>{{workout.nameInEnglish}} @if(workout.abbreviation) { <strong>({{workout.abbreviation}})</strong> } </mat-card-title>
-                    <mat-card-subtitle>{{workout.nameInSpanish}}</mat-card-subtitle>
+                    <div class="workout-info">
+                        <div class="name cursor-pointer" >
+                            <div class="english">{{workout.nameInEnglish}} @if(workout.abbreviation) { <strong>({{workout.abbreviation}})</strong> }</div>
+                            <div class="spanish">{{workout.nameInSpanish}}</div>
+                        </div>
+                        <div>
+                            @if(update()){
+                                <button mat-icon-button [matMenuTriggerFor]="menuWorkout" [matMenuTriggerData]="{ workout }" (click)="onClickMenu($event)">
+                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                </button>
+                            }
+                        </div>
+                    </div>
                 </mat-card-content>
             </mat-card>
         }
     </app-page-content>
 </app-page>
+
+<mat-menu #menuWorkout="matMenu">
+    <ng-template matMenuContent let-workout="workout">
+        <button mat-menu-item (click)="onClickEdit(workout)">Editar</button>
+        @if(pdelete()){
+            <button mat-menu-item (click)="onClickDelete(workout.id)">Eliminar</button>
+        }
+    </ng-template>
+</mat-menu>

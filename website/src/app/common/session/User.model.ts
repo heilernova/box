@@ -39,8 +39,27 @@ export interface IRmRecord {
     weightInPounds: number
 }
 
+
+export enum Permission {
+    USERS_CREATE = 'USERS_CREATE',
+    USERS_READ = 'USERS_READ',
+    USERS_UPDATE = 'USERS_UPDATE',
+    USERS_DELETE = 'USERS_DELETE',
+
+    WORKOUT_CREATE = 'WORKOUT_CREATE',
+    WORKOUT_READ = 'WORKOUT_READ',
+    WORKOUT_UPDATE = 'WORKOUT_UPDATE',
+    WORKOUT_DELETE = 'WORKOUT_DELETE',
+
+    GYMS_CREATE = 'GYMS_CREATE',
+    GYMS_READ = 'GYMS_READ',
+    GYMS_UPDATE = 'GYMS_UPDATE',
+    GYMS_DELETE = 'GYMS_DELETE',
+}
+
 export class User {
     private readonly _apiRms: ApiRmsService;
+    private readonly permissions: string[];
 
     public readonly id: string;
     public readonly role: 'admin' | 'user';
@@ -72,6 +91,7 @@ export class User {
         this.weight = data.weight;
         this.token = data.token;
         this.country = data.country;
+        this.permissions = [];
         if (data.rms){
             this.rms = data.rms;
         }
@@ -94,6 +114,19 @@ export class User {
             country: this.country,
             rms: this.rms
         })
+    }
+
+    checkPermissions(permissions: string[]): boolean {
+        let valid: boolean = true;
+        if (this.role == 'admin') return true;
+        for (let i = 0; i < permissions.length; i++){
+            let r: boolean = this.permissions.some(x => x == permissions[i]);
+            if (!r) {
+                valid = false;
+                break;
+            }
+        }
+        return valid;
     }
 
     getRMs(refresh?: boolean): Promise<IRm[]> {

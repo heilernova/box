@@ -31,8 +31,8 @@ export class WorkoutFormDlgComponent {
     nameInEnglish: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     nameInSpanish: new FormControl<string | null>(null, { nonNullable: true }),
     abbreviation: new FormControl<string | null>(null, {}),
-    rm: new FormControl<boolean | null>(null, { validators: Validators.required }),
-    pr: new FormControl<boolean | null>(null, { validators: Validators.required }),
+    rm: new FormControl<boolean | null>(null),
+    pr: new FormControl<boolean | null>(null),
   });
 
   constructor(@Inject(MAT_DIALOG_DATA) data?: Workout){
@@ -75,12 +75,12 @@ export class WorkoutFormDlgComponent {
         nameInEnglish: value.nameInEnglish,
         nameInSpanish: value.nameInSpanish ? (value.nameInSpanish.length == 0 ? value.nameInSpanish : null) : null,
         abbreviation: value.abbreviation ? (value.abbreviation.length == 0 ? value.abbreviation : null) : null,
-        pr: value.pr as boolean,
-        rm: value.rm as boolean,
+        pr: value.pr ?? false,
+        rm: value.rm ?? false,
         description: null,
         youTube: null
       }).then(workout => {
-        this._message.success('No se pudo crear el ejercicio');
+        this._message.success('Ejercicio agregado');
         this._matDialogRef.close(workout);
       })
       .catch(err => {

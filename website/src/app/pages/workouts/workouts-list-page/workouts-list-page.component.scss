@@ -11,6 +11,18 @@
     gap: .5em;
 }
 
+.workout-info {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    .name {
+        .english {
+            font-size: 1.4em;
+        }
+    }
+
+}
+
 @media screen and (max-width: 788px) {
     button {
         span {
