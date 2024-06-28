@@ -38,7 +38,7 @@ export class RmsListPageComponent {
       if (value){
         this._user = value;
         value.getRMs().then(list => {
-          this._listBase = list;
+          this._listBase = list.sort((a, b) => ((a.record ? 0 : 1) - (b.record ? 0 : 1)));
           this.list.set(list);
         })
       }
