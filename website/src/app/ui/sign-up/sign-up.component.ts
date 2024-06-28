@@ -88,6 +88,7 @@ export class SignUpComponent {
       weight: values.weight as number,
       password: values.password as string,
       username: values.username as string,
+      country: values.country as string
     }).then(() => {
       this._router.navigate(['/'])
     })

@@ -4,6 +4,11 @@ form {
     .inputs {
         display: flex;
         flex-direction: column;
+        section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+            gap: 1em;
+        }
     }
     
     .actions {

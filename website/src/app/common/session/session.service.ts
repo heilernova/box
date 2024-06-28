@@ -63,7 +63,8 @@ export class SessionService {
             birthdate: res.birthdate,
             tall: res.tall,
             token: res.token,
-            weight: res.weight
+            weight: res.weight,
+            country: res.country
           }, this._apiRMs);
 
           this.setUser(user);
@@ -74,7 +75,7 @@ export class SessionService {
     })
   }
 
-  signUp(data: { name: string, lastName: string, alias: string | null, sex: 'M' | 'F', birthdate: Date | string, tall: number, weight: number, email: string, cellphone: string, username: string, password: string }){
+  signUp(data: { name: string, lastName: string, alias: string | null, sex: 'M' | 'F', birthdate: Date | string, tall: number, weight: number, email: string, cellphone: string, username: string, password: string, country: string }){
     return new Promise((resolve, reject) => {
       this._apiAuth.signUp({
         name: data.name,
@@ -88,7 +89,7 @@ export class SessionService {
         username: data.username,
         password: data.password,
         birthdate: data.birthdate,
-        country: 'CO'
+        country: data.country,
       }).subscribe({
         next: res => {
           let user = new User({
@@ -103,7 +104,8 @@ export class SessionService {
             birthdate: res.birthdate,
             tall: res.tall,
             token: res.token,
-            weight: res.weight
+            weight: res.weight,
+            country: res.country
           }, this._apiRMs);
           this.setUser(user);
           resolve(user);

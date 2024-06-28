@@ -47,6 +47,7 @@ section {
         padding: 1em;
         .page {
             width: 100%;
+            max-width: 1600px;
         }
     }
 
@@ -75,9 +76,12 @@ section {
         .page-container {
             overflow: auto;
             padding: .5em;
+            display: flex;
+            justify-content: center;
             .page {
                 overflow: auto;
-
+                width: 100%;
+                max-width: 900px;
             }
         }
         footer {

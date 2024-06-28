@@ -34,7 +34,8 @@ export interface APIAuthResponse {
   sex: "M" | "F",
   tall: number,
   weight: number,
-  token: string
+  token: string,
+  country: string
 }
 
 
@@ -49,6 +50,6 @@ export interface APIAuthSignUpData {
   cellphone: string;
   tall: number;
   weight: number;
-  country: "CO";
+  country: string;
   password: string;
 }

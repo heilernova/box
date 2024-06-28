@@ -34,7 +34,8 @@ export interface APIProfileInfo {
   weight: number;
   username: string;
   email: string;
-  cellphone: string; 
+  cellphone: string;
+  country: string;
 }
 
 export interface APIProfileUpdate {
@@ -47,5 +48,6 @@ export interface APIProfileUpdate {
   weight?: number;
   username?: string;
   email?: string;
-  cellphone?: string; 
+  cellphone?: string;
+  country?: string;
 }

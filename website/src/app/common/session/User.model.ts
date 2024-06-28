@@ -14,6 +14,7 @@ export interface IUserData {
     tall: number,
     weight: number,
     token: string,
+    country: string;
     rms?: any[];
 }
 
@@ -53,6 +54,7 @@ export class User {
     public readonly tall: number;
     public readonly weight: number;
     public readonly token: string;
+    public readonly country: string;
     private rms: IRm[] = [];
     
     constructor(data: IUserData, apiRms: ApiRmsService){
@@ -69,6 +71,7 @@ export class User {
         this.tall = data.tall;
         this.weight = data.weight;
         this.token = data.token;
+        this.country = data.country;
         if (data.rms){
             this.rms = data.rms;
         }
@@ -88,6 +91,7 @@ export class User {
             tall: this.tall,
             weight: this.weight,
             token: this.token,
+            country: this.country,
             rms: this.rms
         })
     }
