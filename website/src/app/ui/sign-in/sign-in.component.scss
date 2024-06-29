@@ -16,6 +16,10 @@ section {
             display: flex;
             flex-direction: column;
         }
+
+        .actions {
+            row-gap: .5em;
+        }
     }
 }
 

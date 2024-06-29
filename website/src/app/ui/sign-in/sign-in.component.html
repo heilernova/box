@@ -2,9 +2,8 @@
     <form [formGroup]="credentials">
         <div class="header">
             <div routerLink="/" style="display: flex; justify-content: center;">
-                <img src="logo.svg" alt="Box" height="200">
+                <img src="logo.svg" alt="Box" height="200" class="cursor-pointer">
             </div>
-            <!-- <h1 routerLink="/">Box</h1> -->
             <h2>Iniciar sesión</h2>
         </div>
         <div class="inputs">
@@ -18,15 +17,22 @@
             </mat-form-field>
         </div>
         <div class="actions">
-            <button mat-button type="button" (click)="onClickSend()">
+            <button mat-flat-button type="button" (click)="onClickSend()">
                 Iniciar sesión
             </button>
-            <button mat-button color="accent" routerLink="/sign-up" type="button">
+            <button mat-button routerLink="/sign-up" type="button">
                 Registrarse
             </button>
         </div>
     </form>
 </section>
 <footer>
-    Copyright © 2024 Novah.dev
+    <div class="content" style="display: flex; justify-content: center; align-items: center; column-gap: .5em;">
+        <div>
+            <img src="logo-novah.svg" alt="Novah.dev" height="25">
+        </div>
+        <div>
+            Copyright © 2024 by Novah.dev
+        </div>
+    </div>
 </footer>

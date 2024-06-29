@@ -1,52 +1,66 @@
 <header>
-    <div class="logo cursor-pointer" routerLink="/">
-        <img src="logo.svg" alt="" height="40">
-        <!-- Box -->
-    </div>
-    <nav>
-        @for (item of navItems(); track $index) {
-            <a routerLink="/rms" routerLinkActive="active">
-                <i class="fa-solid fa-clipboard-list"></i>
-                RMs
-            </a>
-        }
-        <a routerLink="/ejercicios" routerLinkActive="active">
-            <i class="fa-solid fa-dumbbell"></i>
-            Ejercicios
-        </a>
-        <a routerLink="/wods" routerLinkActive="active">
-            <i class="fa-solid fa-weight-hanging"></i>
-            WODs
-        </a>
-        <a routerLink="/gyms" routerLinkActive="active">
-            <i class="fa-solid fa-box"></i>
-            Gym's
-        </a>
-        <a routerLink="/atletas" routerLinkActive="active">
-            <i class="fa-solid fa-people-group"></i>
-            Atletas
-        </a>
-        <a routerLink="/competencias" routerLinkActive="active">
-            <i class="fa-solid fa-medal"></i>
-            Competencias
-        </a>
-    </nav>
-
-    <div class="access">
-        @if (user()) {
-            <div [matMenuTriggerFor]="menu" class="user cursor-pointer">
-                {{user()?.alias ?? user()?.name + ' ' + user()?.lastName  }}
+    <div class="content">
+        <div class="menu-for-web">
+            <button mat-icon-button [matMenuTriggerFor]="menuNav">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        <div class="logo-container">
+            <div class="logo cursor-pointer" routerLink="/">
+                Box App
             </div>
-        } @else {
-            <button routerLink="/login" mat-button>Iniciar sesión</button>
-            <button routerLink="/registrarse" mat-flat-button extended>Registrarse</button>
-        }
-        <mat-menu #menu="matMenu" xPosition="before">
-            <button mat-menu-item routerLink="/perfil">Perfil</button>
-            <button mat-menu-item (click)="onClickLogout()">Cerrar sesión</button>
-        </mat-menu>
+        </div>
+        <nav>
+            @for (item of navForWeb(); track $index) {
+                <a [routerLink]="item.link" routerLinkActive="active" matRipple>
+                    <div class="icon">
+                        <i [classList]="item.icon"></i>
+                    </div>
+                    <div class="name">
+                        {{item.name}}
+                    </div>
+                </a>
+            }
+        </nav>
+        <div class="access">
+            @if (user()){
+                <div class="user cursor-pointer" [matMenuTriggerFor]="menu">
+                    <div class="icon" >
+                        <i class="fa-solid fa-circle-user"></i>
+                    </div>
+                    <div class="name">
+                        {{user()?.alias ?? user()?.name + ' ' + user()?.lastName  }}
+                    </div>
+                    
+                </div>
+            } @else {
+                <button routerLink="/login" mat-button>
+                    <i class="fa-solid fa-user"></i>
+                    <span>
+                        Iniciar sesión
+                    </span>
+                </button>
+                <button routerLink="/registrarse" mat-flat-button extended>
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    <span>
+                        Registrarse
+                    </span>
+                </button>
+            }
+        </div>
     </div>
 </header>
+<mat-menu #menu="matMenu" xPosition="before">
+    <button mat-menu-item routerLink="/perfil">Perfil</button>
+    <button mat-menu-item (click)="onClickLogout()">Cerrar sesión</button>
+</mat-menu>
+<mat-menu #menuNav="matMenu" xPosition="before">
+    @for (item of navForWeb(); track $index) {
+        <button [routerLink]="item.link" mat-menu-item>
+            <i [classList]="item.icon"></i>
+            {{item.name}}
+        </button>
+    }</mat-menu>
 <section>
     <div class="page-container">
         <div class="page">
@@ -55,62 +69,12 @@
     </div>
     <footer>
         <div class="content">
-            Copyright © 2024 Novah.dev
+            <div>
+                <img src="logo-novah.svg" alt="Novah.dev" height="25">
+            </div>
+            <div>
+                Copyright © 2024 by Novah.dev
+            </div>
         </div>
-        <nav>
-            @for (item of navItems(); track $index) {
-                <a routerLink="/rms" routerLinkActive="active">
-                    <div class="icon">
-                        <i class="fa-solid fa-clipboard-list"></i>
-                    </div>
-                    <div class="name">
-                        RMs
-                    </div>
-                </a>
-            }
-            <a routerLink="/ejercicios" routerLinkActive="active">
-                <div class="icon">
-                    <i class="fa-solid fa-dumbbell"></i>
-                </div>
-                <div class="name">
-                    Ejercicios
-                </div>
-            </a>
-            <a routerLink="/wods" routerLinkActive="active">
-                <div class="icon">
-                    <i class="fa-solid fa-weight-hanging"></i>
-                </div>
-                <div class="name">
-                    WODs
-                </div>
-            </a>
-            @if (!user()){
-
-                <a routerLink="/gyms" routerLinkActive="active">
-                    <div class="icon">
-                        <i class="fa-solid fa-box"></i>
-                    </div>
-                    <div class="name">
-                        Gym's
-                    </div>
-                </a>
-            }
-            <a routerLink="/atletas" routerLinkActive="active">
-                <div class="icon">
-                    <i class="fa-solid fa-people-group"></i>
-                </div>
-                <div class="name">
-                    Atletas
-                </div>
-            </a>
-            <a routerLink="/menu" routerLinkActive="active">
-                <div class="icon">
-                    <i class="fa-solid fa-bars"></i>
-                </div>
-                <div class="name">
-                    Menu
-                </div>
-            </a>
-        </nav>
     </footer>
 </section>
