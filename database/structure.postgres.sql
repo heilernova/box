@@ -15,25 +15,39 @@ create domain email as varchar(100) check (value ~* '^[A-Za-z0-9._+%-]+@[A-Za-z0
 --------------------------------------------------------------------------------------------------------------------------
 create table countries
 (
-    "code" char(2) primary key,
-    "name" varchar(100) not null,
-    "sections_name" varchar(50) not null
+    "id" uuid primary key default gen_random_uuid(),
+    "name" varchar(80),
+    "code_alfa_2" char(2) not null unique,
+    "code_alfa_3" char(3) not null unique,
+    "code_numeric" char(3),
+    "phone_code" varchar(5),
+    "demonym" varchar(80),
+    "nationality" varchar(80),
+    "territorial_division" varchar(50) -- Departamentos, estados, Provincias
 );
 
-insert into countries values ('CO', 'Colombia', 'Departamentos');
-
-create table countries_sections
+create table countries_regions
 (
-    "code" char(2) primary key,
-    "name" varchar(100),
-    "country_code" char(2) not null
+    "id" uuid primary key default gen_random_uuid(),
+    "country_id" uuid not null,
+    "name" varchar(50) not null
+);
+
+create table countries_territories
+(
+    "id" uuid primary key default gen_random_uuid(),
+    "country_id" uuid not null,
+    "region_id" uuid,
+    "code" varchar(5) not null,
+    "name" varchar(80)
 );
 
 create table countries_cities
 (
-    "code" char(5) primary key,
-    "name" varchar(100),
-    "section_code" char(2) not null
+    "id" uuid primary key default gen_random_uuid(),
+    "territory_id" uuid not null,
+    "code" varchar(8),
+    "name" varchar(80)
 );
 
 --------------------------------------------------------------------------------------------------------------------------
@@ -329,15 +343,20 @@ create table wods_results_wods_results
 -- Foreign keys
 --------------------------------------------------------------------------------------------------------------------------
 
-alter table countries_sections
-    add constraint fk_countries_sections__countries
-        foreign key (country_code)
-        references countries(code);
+alter table countries_regions
+    add constraint fk_countries_regions__countries
+        foreign key (country_id)
+        references countries(id);
+
+alter table countries_territories
+    add constraint fk_countries_territories__countries_sections
+        foreign key (country_id)
+        references countries(id);
 
 alter table countries_cities
-    add constraint fk_countries_cities__countries_sections
-        foreign key (section_code)
-        references countries_sections(code);
+    add constraint fk_countries_cities__countries
+        foreign key (territory_id)
+        references countries_territories(id);
 
 alter  table users_log
     add constraint fk_users_log__users
