@@ -36,11 +36,11 @@ export class ProfileRmsController {
         let weightInPounds: number;
 
         if (body.unit == 'kilos'){
-            weightInPounds = body.weight;
-            weightInKilos = Math.round(body.weight * 2.20462);
-        } else {
             weightInKilos = body.weight;
-            weightInPounds = Math.round(body.weight / 2.20462);
+            weightInPounds = Math.round(body.weight * 2.20462);
+        } else {
+            weightInPounds = body.weight;
+            weightInKilos = Math.round(body.weight / 2.20462);
         }
 
         let result = await this._rms.register({
