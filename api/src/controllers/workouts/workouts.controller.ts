@@ -1,10 +1,12 @@
 import { WorkoutsService } from '@app/common/models/workouts';
 import { IWorkout } from '@app/common/models/workouts/workouts.interfaces';
-import { Body, Controller, Delete, Get, Param, Patch, Post, Put, UseGuards } from '@nestjs/common';
-import { WorkoutCreateDto } from './dto/workout-create.dto';
+import { Body, Controller, Delete, Get, HttpException, Param, Post, Put, UseGuards } from '@nestjs/common';
+
 import { WorkoutPipe } from '@app/pipes';
-import { WorkoutUpdateDto } from './dto/workout-update.dto';
 import { Permission, RequirePermissions, SessionAuthGuard } from '@app/common/session';
+
+import { WorkoutCreateDto } from './dto/workout-create.dto';
+import { WorkoutUpdateDto } from './dto/workout-update.dto';
 
 @Controller('workouts')
 export class WorkoutsController {
@@ -16,6 +18,8 @@ export class WorkoutsController {
     @UseGuards(SessionAuthGuard)
     @RequirePermissions(Permission.WORKOUT_CREATE)
     async create(@Body() data: WorkoutCreateDto){
+        let nameValid = await this._workouts.nameValid(data.name_in_english);
+        if (!nameValid) throw new HttpException(`Ya hay un ejercicio ${data.name_in_english}` , 400);
         return this._workouts.create(data);
     }
     

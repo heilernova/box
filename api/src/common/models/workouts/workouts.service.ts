@@ -34,4 +34,8 @@ export class WorkoutsService {
     async delete(id: UUID): Promise<boolean> {
         return (await this._db.delete('workouts', ['id = $1', [id]])).rowCount == 1;
     }
+
+    async nameValid(name: string): Promise<boolean> {
+        return (await this._db.query<[boolean]>('select count(*) = 0 from workouts where lower(name_in_english) = lower($1)', [name], true)).rows[0][0];
+    }
 }
