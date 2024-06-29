@@ -19,11 +19,13 @@ export class WorkoutsInfoDlgComponent {
   public readonly abbreviation = signal<string>('');
   public readonly nameInSpanish = signal<string>('');
   public readonly description = signal<string>('');
+  public readonly urlYouTube = signal<string | null>(null);
 
   constructor(@Inject(MAT_DIALOG_DATA) readonly _workout: Workout){
     this.name.set(_workout.nameInEnglish);
     this.nameInSpanish.set(_workout.nameInSpanish ?? '');
     this.abbreviation.set(_workout.abbreviation ?? '');
     this.description.set(_workout.description ?? '');
+    this.urlYouTube.set(_workout.youTube);
   }
 }

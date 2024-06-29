@@ -23,10 +23,10 @@
     </app-page-header>
     <app-page-content class="result">
         @for (workout of list(); track $index) {
-            <mat-card (click)="onClickOpenPreview(workout)">
+            <mat-card (click)="onClickOpenPreview(workout)" class="cursor-pointer">
                 <mat-card-content>
                     <div class="workout-info">
-                        <div class="name cursor-pointer" >
+                        <div class="name" >
                             <div class="english">{{workout.nameInEnglish}} @if(workout.abbreviation) { <strong>({{workout.abbreviation}})</strong> }</div>
                             <div class="spanish">{{workout.nameInSpanish}}</div>
                         </div>
@@ -44,7 +44,7 @@
     </app-page-content>
 </app-page>
 
-<mat-menu #menuWorkout="matMenu">
+<mat-menu #menuWorkout="matMenu" xPosition="before">
     <ng-template matMenuContent let-workout="workout">
         <button mat-menu-item (click)="onClickEdit(workout)">Editar</button>
         @if(pdelete()){

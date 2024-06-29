@@ -8,8 +8,8 @@
 </mat-dialog-actions>
 <mat-dialog-actions>
     <button mat-button disabled>Ver mas información</button>
-    <button mat-flat-button disabled>
+    <a mat-flat-button [disabled]="!urlYouTube()" target="_blank" [href]="urlYouTube()">
         <i class="fa-brands fa-youtube"></i>
         <span>Ver video</span>
-    </button>
+    </a>
 </mat-dialog-actions>

@@ -33,6 +33,7 @@ export class WorkoutFormDlgComponent {
     abbreviation: new FormControl<string | null>(null, {}),
     rm: new FormControl<boolean | null>(null),
     pr: new FormControl<boolean | null>(null),
+    youTube: new FormControl<string | null>(null, {}),
   });
 
   constructor(@Inject(MAT_DIALOG_DATA) data?: Workout){
@@ -43,7 +44,8 @@ export class WorkoutFormDlgComponent {
         nameInSpanish: data.nameInSpanish,
         abbreviation: data.abbreviation,
         pr: data.pr,
-        rm: data.rm
+        rm: data.rm,
+        youTube: data.youTube
       })
     }
   }
@@ -53,20 +55,21 @@ export class WorkoutFormDlgComponent {
       this.formGroup.markAllAsTouched();
       return;
     }
-    let value = this.formGroup.getRawValue();
-    
-    if (this._workout){
 
+    let value = this.formGroup.getRawValue();
+
+    if (this._workout){
       this._workout.update({
         nameInEnglish: value.nameInEnglish,
         nameInSpanish: value.nameInSpanish ? (value.nameInSpanish.length == 0 ? value.nameInSpanish : null) : null,
-        abbreviation: value.abbreviation ? (value.abbreviation.length == 0 ? value.abbreviation : null) : null,
+        abbreviation: value.abbreviation ? (value.abbreviation.length > 0 ? value.abbreviation : null) : null,
         pr: value.pr as boolean,
         rm: value.rm as boolean,
         description: null,
-        youTube: null
+        youTube: value.youTube ? (value.youTube.length > 0 ? value.youTube : null) : null
       }).then(() => {
         this._message.success('Ejercicio actualizado');
+        this._matDialogRef.close();
       }).catch(err => {
         this._message.error('No se pudo actualizar');
       })
@@ -74,11 +77,11 @@ export class WorkoutFormDlgComponent {
       this._dataWorkouts.create({
         nameInEnglish: value.nameInEnglish,
         nameInSpanish: value.nameInSpanish ? (value.nameInSpanish.length == 0 ? value.nameInSpanish : null) : null,
-        abbreviation: value.abbreviation ? (value.abbreviation.length == 0 ? value.abbreviation : null) : null,
+        abbreviation: value.abbreviation ? (value.abbreviation.length > 0 ? value.abbreviation : null) : null,
         pr: value.pr ?? false,
         rm: value.rm ?? false,
         description: null,
-        youTube: null
+        youTube: value.youTube ? (value.youTube.length > 0 ? value.youTube : null) : null
       }).then(workout => {
         this._message.success('Ejercicio agregado');
         this._matDialogRef.close(workout);
