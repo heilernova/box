@@ -9,12 +9,17 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 2em;
     form {
         width: 100%;
         max-width: 400px;
         .inputs, .actions {
             display: flex;
             flex-direction: column;
+        }
+
+        .actions {
+            row-gap: .5em;
         }
     }
 }
