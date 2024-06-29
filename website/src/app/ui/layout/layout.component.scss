@@ -19,13 +19,13 @@ header {
             color: inherit;
             font-weight: 500;
             &.active {
-                color: var(--app-nav-item-active-color);
+                color: #3399FF;
                 &:hover {
-                    color: var(--app-nav-item-active-color);
+                    color: #3399FF;
                 }
             }
             &:hover {
-                color: black;
+                color: rgb(104, 100, 100);
                 transition: 0.3s all;
             }
         }

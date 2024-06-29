@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { isLoggedInGuard } from './common/guards';
 
 export const routes: Routes = [
     { path: 'login', loadComponent: () => import('./ui/sign-in/sign-in.component').then(x => x.SignInComponent) },
@@ -8,7 +9,7 @@ export const routes: Routes = [
         loadComponent: () => import('./ui/layout/layout.component').then(x => x.LayoutComponent),
         children: [
             { path: 'ejercicios', loadChildren: () => import('./pages/workouts/workouts.routes') },
-            { path: 'rms', loadChildren: () => import('./pages/rms/rms.routes') },
+            { path: 'rms', canActivate: [isLoggedInGuard], loadChildren: () => import('./pages/rms/rms.routes') },
             { path: 'atletas', loadChildren: () => import('./pages/athletes/athletes.routes') },
             { path: 'menu', loadComponent: () => import('./pages/menu-page/menu-page.component').then(x => x.MenuPageComponent) },
             // { path: 'rms', loadComponent: () => import('./pages/rms-page/rms-page.component').then(x => x.RmsPageComponent) },

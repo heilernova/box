@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { Router } from '@angular/router';
 import { SessionService } from '@app/common/session';
 import { User } from '@app/common/session/User.model';
 import { PageModule } from '@app/ui/page';
@@ -25,6 +26,7 @@ import { RmPreviewDlgComponent } from '@app/ui/rm-preview-dlg/rm-preview-dlg.com
   styleUrl: './rms-list-page.component.scss'
 })
 export class RmsListPageComponent {
+  private readonly _router = inject(Router);
   private _matDialog = inject(MatDialog);
   private _session = inject(SessionService);
   private _inputSearchValue: string = '';
@@ -41,6 +43,8 @@ export class RmsListPageComponent {
           this._listBase = list.sort((a, b) => ((a.record ? 0 : 1) - (b.record ? 0 : 1)));
           this.list.set(list);
         })
+      } else {
+        this._router.navigate(['/']);
       }
     })
   }
