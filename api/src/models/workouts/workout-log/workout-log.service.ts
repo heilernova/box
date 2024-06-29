@@ -7,7 +7,7 @@ export class WorkoutLogService {
     constructor(private readonly _db: ConnectionDbService){}
 
     async register(data: IWorkoutCreate): Promise<IWorkout> {
-        return (await this._db.insert<IWorkout>('select * from workouts_log', data, '*')).rows[0];
+        return (await this._db.insert<IWorkout>('workouts_log', data, '*')).rows[0];
     }
 
     async getAll(filter?: { userId?: string, workoutId?: string }): Promise<IWorkout[]> {

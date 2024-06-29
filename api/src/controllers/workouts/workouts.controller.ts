@@ -43,6 +43,7 @@ export class WorkoutsController {
     async update(@Session('data') session: ISessionData, @Param('slug', WorkoutPipe) workout: IWorkout, @Body() data: WorkoutUpdateDto){
         let workoutUpdate = await this._workouts.update(workout.id, data);
         this._workoutsLog.register({ user_id: session.id, workout_id: workout.id, action: 'update', before: workout, after: workoutUpdate, detail: 'Se crear el ejercicio' });
+        return workoutUpdate;
     }
 
     @Delete(':slug')
