@@ -27,8 +27,8 @@ export class WorkoutsService {
         return (await this._db.query('select * from workouts')).rows;
     }
 
-    async update(id: UUID, data: IWorkoutUpdate): Promise<boolean> {
-        return (await this._db.update('workouts', ['id = $1', [id]], this.parseValue(data))).rowCount == 1;
+    async update(id: UUID, data: IWorkoutUpdate): Promise<IWorkout | false> {
+        return (await this._db.update<IWorkout>('workouts', ['id = $1', [id]], this.parseValue(data), '*')).rows[0] ?? false;
     }
 
     async delete(id: UUID): Promise<boolean> {
