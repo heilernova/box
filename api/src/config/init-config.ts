@@ -18,11 +18,11 @@ export const appInitConfig = () => {
 
     if (!process.env.APP_DIR_FILES){
         throw Error("No se ha definido la variable de entorno APP_DIR_FILES");
-        process.exit(1);
     }
 
     if (!existsSync(process.env.APP_DIR_FILES)){
         mkdirSync(process.env.APP_DIR_FILES);
-        mkdirSync(join(process.env.APP_DIR_FILES, 'products'))
+        mkdirSync(join(process.env.APP_DIR_FILES, 'athletes'));
+        mkdirSync(join(process.env.APP_DIR_FILES, 'gyms'));
     }
 }
