@@ -78,6 +78,7 @@ create table users
     "weight" smallint, --> Weight in kilogramos
     "country" char(2) not null,
     "category" smallint default 0,
+    "verified" uuid,
     "password" text not null, --> password hash
     "permissions" text[] not null default array[]::text[],
     "settings" json not null default '{}'::json
