@@ -15,6 +15,7 @@ export class Athlete {
     public readonly country: "CO";
     public readonly birthdate: Date;
     public readonly category: { id: number, name: string };
+    public readonly verified: string | null;
     private readonly data: { rms: IRm[] } = { rms: [] }
 
     constructor(data: IAthletePlain, api: ApiAthletesService){
@@ -29,6 +30,7 @@ export class Athlete {
         this.weight = data.weight;
         this.country = data.country;
         this.birthdate = new Date(data.birthdate);
+        this.verified = data.verified;
 
         if (data.category == 1){
             this.category = {

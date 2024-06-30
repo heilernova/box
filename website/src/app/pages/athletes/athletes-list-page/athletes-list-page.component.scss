@@ -21,7 +21,8 @@
 }
 
 .athlete-info-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: 50px 1fr;
     column-gap: .5em;
     align-items: center;
     .avatar {
@@ -29,7 +30,6 @@
         aspect-ratio: 1;
         border-radius: 50%;
         height: 50px;
-        // height: 30px;
         overflow: hidden;
         img {
             height: inherit;

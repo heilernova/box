@@ -10,12 +10,15 @@
                         <div class="info">
                             <div class="title">
                                 <div class="name">{{athlete.alias ?? (athlete.name + ' ' + athlete.lastName)}}</div>
-                                <div class="verified">
-                                    <i class="fa-solid fa-certificate"></i>
-                                    <div class="check">
-                                        <i class="fa-solid fa-check"></i>
+
+                                @if (athlete.verified) {
+                                    <div class="verified">
+                                        <i class="fa-solid fa-certificate"></i>
+                                        <div class="check">
+                                            <i class="fa-solid fa-check"></i>
+                                        </div>
                                     </div>
-                                </div>
+                                }
                             </div>
                             <div class="sub-info">
                                 <div class="flag">

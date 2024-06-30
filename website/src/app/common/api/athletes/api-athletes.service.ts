@@ -29,5 +29,6 @@ export interface APIAthleteInfo {
   weight: number,
   country: "CO",
   category: number,
-  birthdate: string
+  birthdate: string,
+  verified: string | null
 }

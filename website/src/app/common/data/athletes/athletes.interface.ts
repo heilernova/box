@@ -10,7 +10,8 @@ export interface IAthletePlain {
     country: "CO";
     birthdate: string;
     category: number;
-    data: { rms: any[] }
+    verified: string | null;
+    data: { rms: any[] };
   }
 
   export interface IAthlete {

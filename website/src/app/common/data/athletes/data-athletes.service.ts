@@ -34,6 +34,7 @@ export class DataAthletesService extends DataBase<Athlete> {
               birthdate: x.birthdate,
               isCoach: x.is_coach,
               category: x.category,
+              verified: x.verified,
               data: { rms: [] }
             }, this._api)
           });
