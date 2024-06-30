@@ -179,21 +179,18 @@ create table gyms
     "id" uuid primary key default gen_random_uuid(),
     "create_at" timestamp not null default now(),
     "update_at" timestamp not null default now(),
-    "user_id" uuid,
     "nit" varchar(15) not null,
-    "dv" char(1) not null,
     "name" varchar(80) not null unique,
-    "balance" numeric(15, 2) not null default 0,
     "slug" varchar(80) not null,
-    "city" char(5) not null,
+    "city" uuid not null,
     "address" varchar(100) not null,
     "coordinates_google_maps" text,
     "email" text,
     "cellphone" cellphone not null,
-    "social_networks" json[] not null default array[]::json[],
+    "social_networks" json not null default '{}'::json,
     "attention_schedule" json[] not null default array[]::json[],
     "tags" text[] default array[]::text[],
-	"description" varchar(100)
+	"description" text
 );
 
 create table gyms_collaborators
