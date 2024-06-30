@@ -23,7 +23,8 @@ export class AthletesController {
                 weight: x.weight,
                 country: x.country,
                 category: x.category,
-                birthdate: x.birthdate
+                birthdate: x.birthdate,
+                verified: x.verified
             };
         });
     }

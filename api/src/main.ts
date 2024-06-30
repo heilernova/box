@@ -9,7 +9,7 @@ async function bootstrap() {
   const port: string = process.env.PORT ?? '3000';
   const app = await NestFactory.create(AppModule);
   const { httpAdapter } = app.get(HttpAdapterHost);
-  app.enableCors();
+  app.enableCors({ origin: '*' });
   app.useGlobalFilters(new AllExceptionsFilter(httpAdapter));
   app.useGlobalInterceptors(new AppResponseInterceptor());
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));

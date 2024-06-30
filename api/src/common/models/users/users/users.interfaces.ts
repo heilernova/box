@@ -24,10 +24,11 @@ export interface IUserDbRow {
     weight: number;
     country: string;
     category: number;
+    verified: string | null;
     password: string;
     permissions: string[]
 }
 
-export interface IUserCreate extends PartialBy<OmitBy<IUserDbRow, 'id' | 'update_at' | 'create_at'>, 'status' | 'role' | 'is_coach' | 'permissions' | 'alias'>{}
+export interface IUserCreate extends PartialBy<OmitBy<IUserDbRow, 'id' | 'update_at' | 'create_at'>, 'status' | 'role' | 'is_coach' | 'permissions' | 'alias' | 'verified'>{}
 export interface IUserUpdate extends Partial<IUserCreate> {}
 export interface IUser extends IUserDbRow {}
