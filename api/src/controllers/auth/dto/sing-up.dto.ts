@@ -1,6 +1,6 @@
 import { IUserCreate, UserRole, UserState } from "@app/common/models/users";
 import { Transform } from "class-transformer";
-import { IsDate, IsEmail, IsIn, IsNumber, IsOptional, IsPhoneNumber, IsPort, IsString, MaxLength } from "class-validator";
+import { IsDate, IsEmail, IsIn, IsNumber, IsOptional, IsPhoneNumber, IsPort, IsString, Max, MaxLength, Min } from "class-validator";
 
 export class SignUpBody implements IUserCreate {
     status?: UserState | undefined;
@@ -45,6 +45,11 @@ export class SignUpBody implements IUserCreate {
 
     @IsPhoneNumber()
     cellphone!: string;
+
+    @IsNumber()
+    @Min(0)
+    @Max(5)
+    category!: number;
 
     @IsString()
     password!: string;   

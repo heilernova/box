@@ -23,6 +23,7 @@ export interface IUserDbRow {
     tall: number;
     weight: number;
     country: string;
+    category: number;
     password: string;
     permissions: string[]
 }

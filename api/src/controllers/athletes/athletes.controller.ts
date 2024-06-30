@@ -22,6 +22,7 @@ export class AthletesController {
                 tall: x.tall,
                 weight: x.weight,
                 country: x.country,
+                category: x.category,
                 birthdate: x.birthdate
             };
         });

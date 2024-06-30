@@ -34,6 +34,7 @@ export class AuthController {
             tall: user.tall,
             weight: user.weight,
             country: user.country,
+            category: user.category,
             token
         }
     }
@@ -65,6 +66,7 @@ export class AuthController {
             tall: user.tall,
             weight: user.weight,
             country: user.country,
+            category: user.category,
             token
         }
     }
@@ -89,6 +91,7 @@ export class AuthController {
             tall: user.tall,
             weight: user.weight,
             country: user.country,
+            category: user.category,
             token
         } 
     }
@@ -107,5 +110,6 @@ export interface IResponseAuth {
     weight: number;
     sex: Sex;
     country: string;
+    category: number;
     token: string;
 }
