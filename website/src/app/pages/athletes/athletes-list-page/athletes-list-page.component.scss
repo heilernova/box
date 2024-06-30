@@ -37,10 +37,21 @@
         }
     }
     .info {
+        overflow: hidden;
         .title {
-            display: grid;
-            grid-template-columns: auto auto;
+            display: flex;
+            // grid-template-columns: auto auto;
             column-gap: .3em;
+
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+
+            .name {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
         }
     }
 

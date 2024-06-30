@@ -66,7 +66,7 @@ export class RmsListPageComponent {
   onClickReloadRMs(): void {
     if (this._user){
       this._user.getRMs(true).then(list => {
-        this._listBase = list;
+        this._listBase = list.sort((a, b) => ((a.record ? 0 : 1) - (b.record ? 0 : 1)));;
         this.list.set(list);
       })
     }
