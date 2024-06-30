@@ -30,12 +30,28 @@
         border-radius: 50%;
         height: 50px;
         // height: 30px;
+        overflow: hidden;
+        img {
+            height: inherit;
+            border-radius: 50px;
+        }
     }
     .info {
         .title {
             display: grid;
             grid-template-columns: auto auto;
             column-gap: .3em;
+        }
+    }
+
+    .sub-info {
+        display: flex;
+        column-gap: .3em;
+        .flag {
+            height: .75em;
+            img {
+                height: inherit;
+            }
         }
     }
     
