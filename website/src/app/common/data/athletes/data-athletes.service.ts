@@ -33,6 +33,7 @@ export class DataAthletesService extends DataBase<Athlete> {
               country: x.country,
               birthdate: x.birthdate,
               isCoach: x.is_coach,
+              category: x.category,
               data: { rms: [] }
             }, this._api)
           });

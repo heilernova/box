@@ -14,6 +14,7 @@ export class Athlete {
     public readonly weight: number;
     public readonly country: "CO";
     public readonly birthdate: Date;
+    public readonly category: { id: number, name: string };
     private readonly data: { rms: IRm[] } = { rms: [] }
 
     constructor(data: IAthletePlain, api: ApiAthletesService){
@@ -28,6 +29,38 @@ export class Athlete {
         this.weight = data.weight;
         this.country = data.country;
         this.birthdate = new Date(data.birthdate);
+
+        if (data.category == 1){
+            this.category = {
+                id: data.category,
+                name: 'Principiante'
+            }
+        } else if (data.category == 2){
+            this.category = {
+                id: data.category,
+                name: 'Intermedio'
+            }
+        } else if (data.category == 3){
+            this.category = {
+                id: data.category,
+                name: 'Avanzado'
+            }
+        }  else if (data.category == 4){
+            this.category = {
+                id: data.category,
+                name: 'RX'
+            }
+        }   else if (data.category == 5){
+            this.category = {
+                id: data.category,
+                name: 'Elite'
+            }
+        } else {
+            this.category = {
+                id: 0,
+                name: 'Sin definir'
+            }
+        }
     }
 
 

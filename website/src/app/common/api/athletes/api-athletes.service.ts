@@ -28,5 +28,6 @@ export interface APIAthleteInfo {
   tall: number,
   weight: number,
   country: "CO",
+  category: number,
   birthdate: string
 }

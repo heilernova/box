@@ -9,6 +9,7 @@ export interface IAthletePlain {
     weight: number;
     country: "CO";
     birthdate: string;
+    category: number;
     data: { rms: any[] }
   }
 
