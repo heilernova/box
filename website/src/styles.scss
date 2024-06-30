@@ -100,6 +100,10 @@ h3 {
   cursor: pointer;
 }
 
+.capitalize {
+  text-transform: capitalize;
+}
+
 .mat-input-low.mat-form-field-appearance-outline {
   --mat-form-field-container-height: 30px;
   --mat-form-field-container-vertical-padding: 6px;
