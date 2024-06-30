@@ -58,6 +58,7 @@
         height: 100%;
         display: grid;
         grid-template-rows: 1fr auto;
+        overflow: auto;
         .page-container {
             padding: 1em;
             display: flex;

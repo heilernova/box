@@ -13,6 +13,7 @@ const NAV_FOR_WEB: { name: string, icon: string, link: string }[] = [
   { name: "Gym's", icon: 'fa-solid fa-box', link: '/gyms' },
   { name: "Atletas", icon: 'fa-solid fa-people-group', link: '/atletas' },
   { name: "Competencias", icon: 'fa-solid fa-medal', link: '/competencias' },
+  // { name: "Mis resultados", icon: 'fa-solid fa-chart-line', link: '/mis-resultados' },
 ];
 
 @Component({
