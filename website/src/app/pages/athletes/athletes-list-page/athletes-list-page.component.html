@@ -3,8 +3,27 @@
         @for (athlete of list(); track $index) {
             <mat-card (click)="onClickPreview(athlete)" style="overflow: hidden;">
                 <mat-card-content>
-                    <mat-card-title class="name">{{athlete.alias ?? (athlete.name + ' ' + athlete.lastName)}}</mat-card-title>
-                    <mat-card-title><span>{{'@'}}</span>{{athlete.username}}</mat-card-title>
+                    <div class="athlete-info-container">
+                        <div class="avatar">
+
+                        </div>
+                        <div class="info">
+                            <div class="title">
+                                <div class="name">{{athlete.alias ?? (athlete.name + ' ' + athlete.lastName)}}</div>
+                                <div class="verified">
+                                    <i class="fa-solid fa-certificate"></i>
+                                    <div class="check">
+                                        <i class="fa-solid fa-check"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="category">
+                                Intermedio
+                            </div>
+                        </div>
+
+
+                    </div>
                 </mat-card-content>
             </mat-card>
         }
