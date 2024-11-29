@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@box/core": ["packages/core/src/index.ts"]
+      "@box/core": ["packages/core/src/index.ts"],
+      "@box/schemas/*": ["packages/schemas/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
